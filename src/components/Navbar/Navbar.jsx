@@ -12,6 +12,7 @@ const Navbar = (props) => {
       </Link>
 
       <div className="nav__authLinks">
+        {/** Menu shown when a user is loged in */}
         {props.user ? (
           <>
             <Link to={PATHS.PROTECTEDPAGE} className="authLink">

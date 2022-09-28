@@ -6,6 +6,11 @@ import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
 
+// Import pages
+import HomePage from "./pages/HomePage";
+import LogIn from "./pages/LogIn";
+import Signup from "./pages/Signup";
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,9 +58,12 @@ export default function App() {
     <div className="App">
       <Navbar handleLogout={handleLogout} user={user} />
       <Routes>
-        {routes({ user, authenticate, handleLogout }).map((route) => (
+        {/* {routes({ user, authenticate, handleLogout }).map((route) => (
           <Route key={route.path} path={route.path} element={route.element} />
-        ))}
+        ))} */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/auth/login" element={<LogIn />} />
+        <Route path="/auth/signup" element={<Signup />} />
       </Routes>
     </div>
   );
