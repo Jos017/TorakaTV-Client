@@ -29,10 +29,10 @@ const Navbar = (props) => {
           </>
         ) : (
           <>
-            <Link to={PATHS.SIGNUPPAGE} className="authLink">
+            <Link to="/auth/signup" className="authLink">
               Signup
             </Link>
-            <Link to={PATHS.LOGINPAGE} className="authLink">
+            <Link to="/auth/login" className="authLink">
               Log In
             </Link>
           </>
