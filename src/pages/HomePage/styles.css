@@ -3,6 +3,10 @@
   color: #fff;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .hero,
 .track-section {
   display: flex;

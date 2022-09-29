@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
@@ -10,21 +10,25 @@ import "@fontsource/roboto/700.css";
 
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
 const theme = createTheme({
   palette: {
-    primary: {
+    custom: {
       main: "#13c6b2",
+      light: "#33eBd5",
+      dark: "#0f9585",
+      contrastText: "#fff",
     },
   },
 });
 
-ReactDOM.render(
+root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
     </ThemeProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );

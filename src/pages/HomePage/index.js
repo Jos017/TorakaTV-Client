@@ -21,13 +21,13 @@ function HomePage() {
           Save an schedule your movies and TV series with us
         </Typograpy>
         <Stack spacing={2} direction="row" margin={2}>
-          <a href="#track-section">
-            <Button variant="outlined" color="primary">
+          <a href="#track-section" className="link">
+            <Button variant="outlined" color="custom">
               Learn more
             </Button>
           </a>
-          <Link to="/auth/login">
-            <Button variant="contained" color="primary">
+          <Link to="/auth/login" className="link">
+            <Button variant="contained" color="custom">
               Get Started
             </Button>
           </Link>
