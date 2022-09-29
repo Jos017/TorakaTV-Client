@@ -1,15 +1,32 @@
 nav {
   display: flex;
-  padding: 1em;
   justify-content: space-around;
+  align-items: center;
   flex-wrap: wrap;
+  height: 6.4rem;
   background: #282c34;
   font-weight: 600;
 }
 
 .nav__projectName {
-  color: #e4f9ff;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #13c6b2;
   text-decoration: none;
+}
+
+.nav__projectName h2 {
+  font-size: 3rem;
+}
+
+.logo-image {
+  height: 4rem;
+}
+
+.logo-image img {
+  height: 100%;
+  width: 100%;
 }
 
 .authLink {

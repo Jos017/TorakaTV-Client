@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
 import * as CONSTS from "../../utils/consts";
+import logo from "../../images/logo.png";
+import SearchBar from "../SearchBar";
 
 const Navbar = (props) => {
   return (
     <nav>
-      <Link to={PATHS.HOMEPAGE} className="nav__projectName">
-        {CONSTS.CAPITALIZED_APP} - created with IronLauncher
+      <Link to={"/"} className="nav__projectName">
+        <div className="logo-image">
+          <img src={logo} alt="Logo" />
+        </div>
+        <h2>TorakaTV</h2>
       </Link>
-
+      <SearchBar />
       <div className="nav__authLinks">
         {/** Menu shown when a user is loged in */}
         {props.user ? (
