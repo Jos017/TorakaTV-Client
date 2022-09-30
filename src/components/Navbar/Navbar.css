@@ -7,7 +7,7 @@ nav {
   flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  padding: 1.2rem;
+  padding: 0.5rem;
   background: rgba(44, 44, 44, 0.5);
   font-weight: 600;
 }
@@ -21,11 +21,11 @@ nav {
 }
 
 .nav__projectName h2 {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 .logo-image {
-  height: 4rem;
+  height: 3rem;
 }
 
 .logo-image img {

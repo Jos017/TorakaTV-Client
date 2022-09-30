@@ -13,7 +13,7 @@ function HomePage() {
           variant="h1"
           component="h2"
           fontWeight="bold"
-          width={{ xs: "90%", md: "80rem" }}
+          width={{ xs: "90%", md: "50rem" }}
         >
           Never forget your watching list again
         </Typograpy>
@@ -43,7 +43,7 @@ function HomePage() {
               variant="h1"
               component="h2"
               fontWeight="bold"
-              width={{ xs: "90%", md: "80rem" }}
+              width={{ xs: "90%", md: "50rem" }}
             >
               Track your movies and series
             </Typograpy>

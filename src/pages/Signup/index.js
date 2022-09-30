@@ -86,12 +86,7 @@ export default function Signup({ authenticate }) {
         <div className="signup-logo">
           <img src={logo} alt="Logo" />
         </div>
-        <Typograpy
-          variant="h2"
-          component="h2"
-          fontWeight="bold"
-          marginTop="5rem"
-        >
+        <Typograpy variant="h4" fontWeight="bold" marginTop="3rem">
           TorakaTV
         </Typograpy>
         <form onSubmit={handleFormSubmission} className="signup__form">

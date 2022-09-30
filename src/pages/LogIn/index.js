@@ -65,12 +65,7 @@ export default function LogIn({ authenticate }) {
         <div className="login-logo">
           <img src={logo} alt="Logo" />
         </div>
-        <Typograpy
-          variant="h2"
-          component="h2"
-          fontWeight="bold"
-          marginTop="5rem"
-        >
+        <Typograpy variant="h4" fontWeight="bold" marginTop="3rem">
           TorakaTV
         </Typograpy>
         <form onSubmit={handleFormSubmission} className="login__form">
