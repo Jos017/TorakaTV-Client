@@ -5,7 +5,6 @@ import logo from "../../images/logo.png";
 import "./styles.css";
 import * as PATHS from "../../utils/paths";
 import * as USER_HELPERS from "../../utils/userToken";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import Typograpy from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import InputAdornment from "@mui/material/InputAdornment";

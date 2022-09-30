@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer";
 import { getLoggedIn, logout } from "./services/auth";
 import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
@@ -64,13 +65,14 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route
           path="/auth/login"
-          element={<LogIn authenticate={() => authenticate(user)} />}
+          element={<LogIn authenticate={authenticate} />}
         />
         <Route
           path="/auth/signup"
-          element={<Signup authenticate={() => authenticate(user)} />}
+          element={<Signup authenticate={authenticate} />}
         />
       </Routes>
+      <Footer />
     </div>
   );
 }
