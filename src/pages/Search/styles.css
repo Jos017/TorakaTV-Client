@@ -1,6 +1,13 @@
 .search {
   width: 100%;
   min-height: 100vh;
-  padding-top: 6.4rem;
+  padding-top: 4rem;
   background-color: #212121;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }

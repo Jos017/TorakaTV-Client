@@ -72,7 +72,7 @@ export default function App() {
           path="/auth/signup"
           element={<Signup authenticate={authenticate} />}
         />
-        <Route path="/search" element={<Search search="Ironman" />} />
+        <Route path="/search/:search" element={<Search search="Ironman" />} />
       </Routes>
       <Footer />
     </div>
