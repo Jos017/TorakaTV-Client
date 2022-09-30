@@ -11,3 +11,9 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+
+.card-container .img-container {
+  width: 300px;
+  object-fit: contain;
+  overflow: hidden;
+}
