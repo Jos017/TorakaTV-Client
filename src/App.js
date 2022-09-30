@@ -11,6 +11,7 @@ import * as USER_HELPERS from "./utils/userToken";
 import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
+import Search from "./pages/Search";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -71,6 +72,7 @@ export default function App() {
           path="/auth/signup"
           element={<Signup authenticate={authenticate} />}
         />
+        <Route path="/search" element={<Search search="Ironman" />} />
       </Routes>
       <Footer />
     </div>
