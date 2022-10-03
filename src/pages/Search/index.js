@@ -3,64 +3,35 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./styles.css";
 import Sidebar from "../../components/Sidebar";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { borderRadius } from "@mui/system";
+import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 
 const Search = (props) => {
   const { search } = useParams();
 
   const [searchResult, setSearchResult] = useState([]);
-  const [casts, setCasts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
+    const movieSearch = async () => {
+      const response = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${search}`
-      )
-      .then((response) => {
-        console.log(response);
-        setSearchResult(response.data.results);
-      })
-      .catch((response) => console.log(response));
+      );
+      setSearchResult(response.data.results);
+    };
+    movieSearch();
   }, [search]);
-
-  const getCredits = (movieId) => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US`
-      )
-      .then((castFound) => {
-        const newCasts = [...casts, castFound];
-        setCasts(newCasts);
-        console.log(casts);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  const getPrincipalActors = (movieId) => {
-    const movieCast = casts.filter((cast) => {
-      return cast.id === movieId;
-    });
-
-    return movieCast.filter((principalCast) => {
-      return principalCast < 3;
-    });
-  };
 
   return (
     <div className="search">
+      {console.log(searchResult)}
       <Sidebar />
       Search: {props.search}
       <div className="card-container">
-        {searchResult.map((movie) => {
+        {searchResult.map((movie, index) => {
           const { id, title, overview, poster_path } = movie;
-          /* getCredits(id); */
           return (
             <Stack
               direction="row"
@@ -71,7 +42,7 @@ const Search = (props) => {
             >
               <CardMedia
                 component="img"
-                alt="green iguana"
+                alt={title}
                 image={`http://image.tmdb.org/t/p/w500${poster_path}`}
                 sx={{ width: 200, borderRadius: "10px 0 0 10px" }}
               />
@@ -87,9 +58,8 @@ const Search = (props) => {
                 <Typography variant="body2" color="#8b96a0">
                   {overview}
                 </Typography>
-                <Typography variant="body2" color="#8b96a0">
-                  {title}
-                  {/* {console.log(getPrincipalActors(id))} */}
+                <Typography variant="body2" component={"span"} color="#8b96a0">
+                  <MovieCreditsSubtitle movieId={id} />
                 </Typography>
                 <Button
                   size="small"
