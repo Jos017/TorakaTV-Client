@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 import { Rating } from "@mui/material";
+import GenresChip from "../../components/GenresChip";
 
 const Search = (props) => {
   const { search } = useParams();
@@ -27,11 +28,13 @@ const Search = (props) => {
 
   return (
     <div className="search">
+      {console.log(searchResult)}
       <Sidebar />
       Search: {props.search}
       <div className="card-container">
         {searchResult.map((movie) => {
-          const { id, title, overview, poster_path } = movie;
+          const { id, title, overview, poster_path, vote_average, genre_ids } =
+            movie;
           return (
             <Stack
               direction="row"
@@ -55,7 +58,13 @@ const Search = (props) => {
                 >
                   {title}
                 </Typography>
-                <Rating value={4} readOnly />
+                <Stack direction="row" spacing={1}>
+                  <GenresChip movieGenresId={genre_ids} />
+                  <Rating value={vote_average / 10} max={1} />
+                  <Typography variant="subtitle2" color="#fff">
+                    {vote_average}/<span style={{ color: "#8b96a0" }}>10</span>
+                  </Typography>
+                </Stack>
                 <Typography variant="body2" color="#8b96a0">
                   {overview}
                 </Typography>
