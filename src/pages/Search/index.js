@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./styles.css";
 import Sidebar from "../../components/Sidebar";
@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
+import { Rating } from "@mui/material";
 
 const Search = (props) => {
   const { search } = useParams();
@@ -26,11 +27,10 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      {console.log(searchResult)}
       <Sidebar />
       Search: {props.search}
       <div className="card-container">
-        {searchResult.map((movie, index) => {
+        {searchResult.map((movie) => {
           const { id, title, overview, poster_path } = movie;
           return (
             <Stack
@@ -55,20 +55,23 @@ const Search = (props) => {
                 >
                   {title}
                 </Typography>
+                <Rating value={4} readOnly />
                 <Typography variant="body2" color="#8b96a0">
                   {overview}
                 </Typography>
                 <Typography variant="body2" component={"span"} color="#8b96a0">
                   <MovieCreditsSubtitle movieId={id} />
                 </Typography>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="custom"
-                  sx={{ width: "fit-content" }}
-                >
-                  Learn More
-                </Button>
+                <Link to={`/movie/${id}`}>
+                  <Button
+                    size="small"
+                    variant="contained"
+                    color="custom"
+                    sx={{ width: "fit-content" }}
+                  >
+                    Learn More
+                  </Button>
+                </Link>
               </Stack>
             </Stack>
           );

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
@@ -16,6 +16,8 @@ import Search from "./pages/Search";
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accessToken = USER_HELPERS.getUserToken();
@@ -56,13 +58,27 @@ export default function App() {
   if (isLoading) {
     return <LoadingComponent />;
   }
+
+  const searchResults = (value) => {
+    // console.log("Searching: ", value);
+    setSearch(value);
+  };
+
+  const handleKeyUp = (e) => {
+    if (e.key === "Enter") {
+      navigate(`/search/${search}`);
+    }
+  };
+
   return (
     <div className="App">
-      <Navbar handleLogout={handleLogout} user={user} />
+      <Navbar
+        handleLogout={handleLogout}
+        searchResults={searchResults}
+        handleKeyUp={handleKeyUp}
+        user={user}
+      />
       <Routes>
-        {/* {routes({ user, authenticate, handleLogout }).map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))} */}
         <Route path="/" element={<HomePage />} />
         <Route
           path="/auth/login"
@@ -72,7 +88,7 @@ export default function App() {
           path="/auth/signup"
           element={<Signup authenticate={authenticate} />}
         />
-        <Route path="/search/:search" element={<Search search="Ironman" />} />
+        <Route path="/search/:search" element={<Search search={search} />} />
       </Routes>
       <Footer />
     </div>

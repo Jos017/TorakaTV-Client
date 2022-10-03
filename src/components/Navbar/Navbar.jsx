@@ -18,7 +18,10 @@ const Navbar = (props) => {
         </div>
         <h2>TorakaTV</h2>
       </Link>
-      <SearchBar />
+      <SearchBar
+        searchResults={props.searchResults}
+        handleKeyUp={props.handleKeyUp}
+      />
       <div className="nav__authLinks">
         {/** Menu shown when a user is loged in */}
         {props.user ? (
