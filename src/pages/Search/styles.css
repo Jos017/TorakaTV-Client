@@ -12,8 +12,12 @@
   gap: 20px;
 }
 
-.card-container .img-container {
-  width: 300px;
-  object-fit: contain;
-  overflow: hidden;
+.search .search-link {
+  text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .card-container .card-img {
+    width: 100%;
+  }
 }

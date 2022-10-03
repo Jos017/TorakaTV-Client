@@ -28,7 +28,6 @@ const Search = (props) => {
 
   return (
     <div className="search">
-      {console.log(searchResult)}
       <Sidebar />
       Search: {props.search}
       <div className="card-container">
@@ -37,18 +36,22 @@ const Search = (props) => {
             movie;
           return (
             <Stack
-              direction="row"
+              direction={{ xs: "column", sm: "row" }}
               backgroundColor="#2B303D"
               width={{ xs: "90%", md: "75%", xl: "45%" }}
+              height={{ xs: "auto", md: "fit-contain" }}
               borderRadius="10px"
+              overflow="hidden"
               key={id}
             >
               <CardMedia
+                className="card-img"
                 component="img"
                 alt={title}
                 image={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                sx={{ width: 200, borderRadius: "10px 0 0 10px" }}
+                sx={{ width: 200 }}
               />
+
               <Stack justifyContent="space-between" padding="1rem">
                 <Typography
                   gutterBottom
@@ -65,20 +68,26 @@ const Search = (props) => {
                     {vote_average}/<span style={{ color: "#8b96a0" }}>10</span>
                   </Typography>
                 </Stack>
-                <Typography variant="body2" color="#8b96a0">
-                  {overview}
-                </Typography>
-                <Typography variant="body2" component={"span"} color="#8b96a0">
-                  <MovieCreditsSubtitle movieId={id} />
-                </Typography>
-                <Link to={`/movie/${id}`}>
+                <Stack>
+                  <Typography variant="body2" color="#8b96a0">
+                    {overview}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    component={"span"}
+                    color="#8b96a0"
+                  >
+                    <MovieCreditsSubtitle movieId={id} />
+                  </Typography>
+                </Stack>
+                <Link to={`/movie/${id}`} className="search-link">
                   <Button
                     size="small"
                     variant="contained"
                     color="custom"
                     sx={{ width: "fit-content" }}
                   >
-                    Learn More
+                    More Details
                   </Button>
                 </Link>
               </Stack>
