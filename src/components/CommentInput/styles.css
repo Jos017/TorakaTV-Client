@@ -1,0 +1,15 @@
+.comment-input {
+  background-color: #555;
+  padding: 1rem;
+  border: none;
+  border-radius: 1.5rem;
+  resize: none;
+  width: 90%;
+  max-width: 800px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.comment-input:focus {
+  background-color: #0f9585;
+}

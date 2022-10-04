@@ -14,6 +14,7 @@ import YouTubeFrame from "../../components/YouTubeFrame";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 import ProvidersIcons from "../../components/ProvidersIcons";
 import ImageCarousel from "../../components/ImageCarousel";
+import CommentInput from "../../components/CommentInput";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -99,7 +100,9 @@ const MovieDetailsPage = () => {
           <Typography variant="body1" color="#fff">
             {overview}
           </Typography>
-          <MovieCreditsSubtitle movieId={movieId} />
+          <Typography variant="body2" component={"span"} color="#8b96a0">
+            <MovieCreditsSubtitle movieId={movieId} />
+          </Typography>
         </Grid>
         <Grid item xs={4}>
           <Button variant="outlined" color="custom">
@@ -214,7 +217,9 @@ const MovieDetailsPage = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12}></Grid>
+        <Grid item xs={12}>
+          <CommentInput />
+        </Grid>
         <Grid item xs={1}>
           <Box
             sx={{
