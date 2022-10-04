@@ -7,8 +7,13 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
-import { borderColor } from "@mui/system";
+import Button from "@mui/material/Button";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
 import YouTubeFrame from "../../components/YouTubeFrame";
+import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
+import { grid, height, width } from "@mui/system";
+import ProvidersIcons from "../../components/ProvidersIcons";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -36,7 +41,8 @@ const MovieDetailsPage = () => {
       });
   }, [movieId]);
 
-  const { title, genres, vote_average, poster_path } = movieDetails;
+  const { title, genres, vote_average, poster_path, overview } = movieDetails;
+  // console.log(movieDetails);
   return (
     <section className="movie-details">
       <Grid container spacing={2}>
@@ -58,7 +64,7 @@ const MovieDetailsPage = () => {
         </Grid>
         <Grid item xs={2}>
           <Typography variant="h6">YOUR RATING</Typography>
-          <Rating name="globlal-rating" value={5} precision={0.5} />
+          <Rating name="your-rating" value={5} precision={0.5} />
           <Typography variant="subtitle1" color="#fff">
             10 / 10
           </Typography>
@@ -86,6 +92,161 @@ const MovieDetailsPage = () => {
         <Grid item xs={8}>
           <YouTubeFrame videoKey={trailer[0]?.key} />
         </Grid>
+        <Grid item xs={8}>
+          <Typography variant="h4" color="#fff">
+            Synopsis
+          </Typography>
+          <Typography variant="body1" color="#fff">
+            {overview}
+          </Typography>
+          <MovieCreditsSubtitle movieId={movieId} />
+        </Grid>
+        <Grid item xs={4}>
+          <Button variant="outlined" color="custom">
+            + Add to your List
+          </Button>
+          <Button variant="outlined" color="custom">
+            Program into your calendar
+          </Button>
+        </Grid>
+        <Grid item xs={1}>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs="auto">
+          <Typography variant="h5" color="#fff">
+            WHERE TO WATCH
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}>
+          <ProvidersIcons movieId={movieId} />
+        </Grid>
+        <Grid item xs={1}>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs="auto">
+          <Typography variant="h5" color="#fff">
+            {title?.toUpperCase()} PHOTOS
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}></Grid>
+        <Grid item xs={1}>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs="auto">
+          <Typography variant="h5" color="#fff">
+            COMMENTS
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}></Grid>
+        <Grid item xs={1}>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs="auto">
+          <Typography variant="h5" color="#fff">
+            TOP CAST
+          </Typography>
+        </Grid>
+        <Grid item xs>
+          <Box
+            sx={{
+              pt: "0.5rem",
+              display: "grid",
+              gridTemplateColumns: "1fr",
+            }}
+          >
+            <Paper
+              elevation={3}
+              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12}></Grid>
       </Grid>
     </section>
   );
