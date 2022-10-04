@@ -12,8 +12,8 @@ import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import YouTubeFrame from "../../components/YouTubeFrame";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
-import { grid, height, width } from "@mui/system";
 import ProvidersIcons from "../../components/ProvidersIcons";
+import ImageCarousel from "../../components/ImageCarousel";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
@@ -178,7 +178,9 @@ const MovieDetailsPage = () => {
             />
           </Box>
         </Grid>
-        <Grid item xs={12}></Grid>
+        <Grid item xs={12}>
+          <ImageCarousel movieId={movieId} />
+        </Grid>
         <Grid item xs={1}>
           <Box
             sx={{

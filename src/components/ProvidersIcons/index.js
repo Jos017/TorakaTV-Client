@@ -16,32 +16,6 @@ const ProvidersIcons = (props) => {
     119: "https://www.primevideo.com/",
   };
 
-  // {
-  //   provider_id: "337",
-  //   provider_name: "Disney Plus",
-  //   provider_url: "https://www.disneyplus.com/",
-  // },
-  // {
-  //   provider_id: "2",
-  //   provider_name: "Apple iTunes",
-  //   provider_url: "https://tv.apple.com/",
-  // },
-  // {
-  //   provider_id: "3",
-  //   provider_name: "Google Play Movies",
-  //   provider_url: "https://play.google.com/store/movies/",
-  // },
-  // {
-  //   provider_id: "8",
-  //   provider_name: "Netflix",
-  //   provider_url: "https://www.netflix.com",
-  // },
-  // {
-  //   provider_id: "119",
-  //   provider_name: "Amazon Prime Video",
-  //   provider_url: "https://www.primevideo.com/",
-  // },
-
   useEffect(() => {
     axios
       .get(
