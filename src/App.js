@@ -12,6 +12,7 @@ import HomePage from "./pages/HomePage";
 import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import Search from "./pages/Search";
+import MovieDetailsPage from "./pages/MovieDetailsPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -89,6 +90,7 @@ export default function App() {
           element={<Signup authenticate={authenticate} />}
         />
         <Route path="/search/:search" element={<Search search={search} />} />
+        <Route path="/movie/:movieId" element={<MovieDetailsPage />} />
       </Routes>
       <Footer />
     </div>
