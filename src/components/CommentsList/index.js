@@ -3,15 +3,17 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import defaultProfile from "../../images/profile-default.png";
 import MenuDial from "../MenuDial";
+import CommentInput from "../CommentInput";
 import Typography from "@mui/material/Typography";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
+
 import ThumbUpOutlinedIcon from "@mui/icons-material/ThumbUpOutlined";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
 const CommentsList = (props) => {
-  const { movieId } = props;
+  const { movieId, userSession } = props;
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -25,8 +27,26 @@ const CommentsList = (props) => {
     getAllCommentsPerMovie();
   }, [movieId]);
 
-  const editComment = (commentId) => {
-    console.log("Editando Comentario", commentId);
+  const addComment = (request) => {
+    axios
+      .post(`${API_URL}/movie/${movieId}/comments`, request)
+      .then((response) => {
+        const newComment = response.data;
+        setComments([newComment, ...comments]);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const editComment = (request) => {
+    axios
+      .put(`${API_URL}/movie/comments/update`, request)
+      .then((response) => {
+        const newComments = comments.map((comment) => {
+          return comment._id === request.commentId ? response.data : comment;
+        });
+        setComments([...newComments]);
+      })
+      .catch((err) => console.log(err));
   };
 
   const deleteComment = (commentId) => {
@@ -47,6 +67,14 @@ const CommentsList = (props) => {
 
   return (
     <div className="comments-list">
+      {userSession && (
+        <CommentInput
+          movieId={movieId}
+          type="add"
+          addComment={addComment}
+          userSession={userSession}
+        />
+      )}
       {comments?.map((comment) => {
         const { user, createdAt, description, _id } = comment;
         return (
@@ -72,11 +100,14 @@ const CommentsList = (props) => {
               </Typography>
             </Grid>
             <Grid item xs="auto">
-              <MenuDial
-                editComment={editComment}
-                deleteComment={deleteComment}
-                commentId={_id}
-              />
+              {userSession._id === user._id && (
+                <MenuDial
+                  editComment={editComment}
+                  deleteComment={deleteComment}
+                  commentId={_id}
+                  description={description}
+                />
+              )}
             </Grid>
             <Grid item xs={12}>
               <Typography

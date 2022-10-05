@@ -220,8 +220,7 @@ const MovieDetailsPage = (props) => {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          {user && <CommentInput movieId={movieId} />}
-          <CommentsList movieId={movieId} color="#fff" />
+          <CommentsList movieId={movieId} color="#fff" userSession={user} />
         </Grid>
         <Grid item xs={1}>
           <Box
