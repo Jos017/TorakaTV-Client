@@ -27,6 +27,7 @@ const ImageCarousel = (props) => {
             src={`http://image.tmdb.org/t/p/w500${image.file_path}`}
             width="250px"
             alt={image.file_path}
+            key={image.file_path}
           />
         );
       })}

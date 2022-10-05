@@ -90,7 +90,10 @@ export default function App() {
           element={<Signup authenticate={authenticate} />}
         />
         <Route path="/search/:search" element={<Search search={search} />} />
-        <Route path="/movie/:movieId" element={<MovieDetailsPage />} />
+        <Route
+          path="/movie/:movieId"
+          element={<MovieDetailsPage user={user} />}
+        />
       </Routes>
       <Footer />
     </div>

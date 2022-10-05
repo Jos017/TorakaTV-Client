@@ -15,8 +15,10 @@ import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 import ProvidersIcons from "../../components/ProvidersIcons";
 import ImageCarousel from "../../components/ImageCarousel";
 import CommentInput from "../../components/CommentInput";
+import CommentsList from "../../components/CommentsList";
 
-const MovieDetailsPage = () => {
+const MovieDetailsPage = (props) => {
+  const { user } = props;
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [trailer, setTrailer] = useState([]);
@@ -218,7 +220,8 @@ const MovieDetailsPage = () => {
           </Box>
         </Grid>
         <Grid item xs={12}>
-          <CommentInput />
+          {user && <CommentInput movieId={movieId} />}
+          <CommentsList movieId={movieId} color="#fff" />
         </Grid>
         <Grid item xs={1}>
           <Box
