@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
-import { Rating } from "@mui/material";
+import Rating from "@mui/material/Rating";
 import GenresChip from "../../components/GenresChip";
 
 const Search = (props) => {
@@ -37,7 +37,7 @@ const Search = (props) => {
           return (
             <Stack
               direction={{ xs: "column", sm: "row" }}
-              backgroundColor="#2B303D"
+              backgroundColor="#242526"
               width={{ xs: "90%", md: "75%", xl: "45%" }}
               height={{ xs: "auto", md: "fit-contain" }}
               borderRadius="10px"

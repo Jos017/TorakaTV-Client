@@ -1,7 +1,7 @@
 import "./styles.css";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -14,7 +14,6 @@ import YouTubeFrame from "../../components/YouTubeFrame";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 import ProvidersIcons from "../../components/ProvidersIcons";
 import ImageCarousel from "../../components/ImageCarousel";
-import CommentInput from "../../components/CommentInput";
 import CommentsList from "../../components/CommentsList";
 
 const MovieDetailsPage = (props) => {
@@ -22,6 +21,8 @@ const MovieDetailsPage = (props) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [trailer, setTrailer] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -43,6 +44,10 @@ const MovieDetailsPage = (props) => {
         setTrailer([...newTrailer]);
       });
   }, [movieId]);
+
+  const addToWatchList = () => {
+    navigate("/myList");
+  };
 
   const { title, genres, vote_average, poster_path, overview } = movieDetails;
   // console.log(movieDetails);
@@ -107,7 +112,7 @@ const MovieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Button variant="outlined" color="custom">
+          <Button variant="outlined" color="custom" onClick={addToWatchList}>
             + Add to your List
           </Button>
           <Button variant="outlined" color="custom">

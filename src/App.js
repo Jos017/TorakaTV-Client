@@ -13,6 +13,7 @@ import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import Search from "./pages/Search";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
+import MyListPage from "./pages/MyListPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -94,6 +95,7 @@ export default function App() {
           path="/movie/:movieId"
           element={<MovieDetailsPage user={user} />}
         />
+        <Route path="/myList" element={<MyListPage user={user} />} />
       </Routes>
       <Footer />
     </div>
