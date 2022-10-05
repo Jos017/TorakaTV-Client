@@ -18,7 +18,7 @@ const ImageCarousel = (props) => {
         setImages([...newImages]);
       });
   }, [movieId]);
-  console.log(images);
+  // console.log(images);
   return (
     <div>
       {images?.map((image) => {

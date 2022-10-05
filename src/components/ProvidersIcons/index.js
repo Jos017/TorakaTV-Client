@@ -26,7 +26,7 @@ const ProvidersIcons = (props) => {
           buy: response.data.results[country].buy,
           subs: response.data.results[country].flatrate,
         };
-        console.log(newProviders);
+        // console.log(newProviders);
         setProviders({ ...newProviders });
       });
   }, [movieId, country]);
