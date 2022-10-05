@@ -124,7 +124,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -143,7 +143,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -160,7 +160,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -179,7 +179,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -196,7 +196,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -215,7 +215,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -232,7 +232,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>
@@ -251,7 +251,7 @@ const MovieDetailsPage = (props) => {
           >
             <Paper
               elevation={3}
-              sx={{ backgroundColor: "dodgerblue", height: "1rem" }}
+              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
             />
           </Box>
         </Grid>

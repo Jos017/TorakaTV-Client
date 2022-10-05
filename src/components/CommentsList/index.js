@@ -1,5 +1,6 @@
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import defaultProfile from "../../images/profile-default.png";
 import MenuDial from "../MenuDial";
@@ -76,7 +77,7 @@ const CommentsList = (props) => {
         />
       )}
       {comments?.map((comment) => {
-        const { user, createdAt, description, _id } = comment;
+        const { user, createdAt, description, _id, updatedAt } = comment;
         return (
           <Grid
             container
@@ -96,7 +97,9 @@ const CommentsList = (props) => {
                 {user.username}
               </Typography>
               <Typography variant="body1" color="#fff">
-                {createdAt}
+                {updatedAt
+                  ? moment(updatedAt).format("DD - MMM - YYYY (HH:mm)")
+                  : moment(createdAt).format("DD - MMM - YYYY (HH:mm)")}
               </Typography>
             </Grid>
             <Grid item xs="auto">
