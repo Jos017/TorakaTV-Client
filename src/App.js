@@ -95,7 +95,7 @@ export default function App() {
           path="/movie/:movieId"
           element={<MovieDetailsPage user={user} />}
         />
-        <Route path="/myList" element={<MyListPage user={user} />} />
+        <Route path="/myList" element={<MyListPage userSession={user} />} />
       </Routes>
       <Footer />
     </div>

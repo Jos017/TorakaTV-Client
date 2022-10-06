@@ -4,8 +4,12 @@ import { styled } from "@mui/material/styles";
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
+import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
-import ButtonBase from "@mui/material/ButtonBase";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import ProgressBar from "../ProgressBar";
+import StatusMenu from "../StatusMenu";
 
 const Img = styled("img")({
   margin: "auto",
@@ -14,48 +18,89 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
-const ListCard = () => {
+const ListCard = (props) => {
+  const {
+    title,
+    status,
+    progress,
+    ranking,
+    img,
+    totalProgress,
+    categories,
+    _id,
+  } = props.info;
+  const { deleteListItem, updateListItem } = props;
   return (
     <Paper
       sx={{
         p: 2,
-        margin: "auto",
+        margin: "1rem auto",
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: "#242526",
         color: "#fff",
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={2} position="relative">
         <Grid item>
-          <ButtonBase sx={{ width: 128, height: 128 }}>
-            <Img alt="complex" src="/static/images/grid/complex.jpg" />
-          </ButtonBase>
+          <Stack sx={{ width: 128, height: 180 }}>
+            <Img alt="complex" src={img} width="auto" height="100%" />
+            <StatusMenu
+              updateListItem={updateListItem}
+              listItemId={_id}
+              initialStatus={status}
+            />
+          </Stack>
         </Grid>
         <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
+          <Grid item xs container direction="column" spacing={1}>
             <Grid item xs>
-              <Typography gutterBottom variant="subtitle1" component="div">
-                Title
+              <Typography gutterBottom variant="h5" component="div">
+                {title}
               </Typography>
-              <Typography variant="body2" gutterBottom>
-                Categories
+              <Typography variant="body2">Ranking: {ranking}</Typography>
+              <Typography
+                variant="body2"
+                component="div"
+                gutterBottom
+                sx={{ borderBottom: "1px solid #fff" }}
+              >
+                {categories.map((category) => {
+                  return (
+                    <Chip
+                      label={category}
+                      key={category}
+                      color="custom"
+                      size="small"
+                      sx={{ mr: 1 }}
+                    />
+                  );
+                })}
               </Typography>
-              <Typography variant="body2">Status</Typography>
-              <Typography variant="body2">ProgressBar</Typography>
-              <Typography variant="body2">Ranking</Typography>
-              <Typography variant="body2">Progress</Typography>
+            </Grid>
+            <Grid item xs>
+              <ProgressBar
+                title="My progress"
+                initialValue={progress}
+                min={0}
+                max={totalProgress}
+                unit="min"
+                updateListItem={updateListItem}
+                listItemId={_id}
+              />
             </Grid>
             <Grid item>
-              <Typography sx={{ cursor: "pointer" }} variant="body2">
-                Remove
-              </Typography>
+              <Stack direction="row" justifyContent="flex-end">
+                <Button
+                  variant="outlined"
+                  color="error"
+                  onClick={() => deleteListItem(_id)}
+                  sx={{ width: "fit-content" }}
+                >
+                  Remove
+                </Button>
+              </Stack>
             </Grid>
-          </Grid>
-          <Grid item>
-            <Typography variant="subtitle1" component="div">
-              $19.00
-            </Typography>
           </Grid>
         </Grid>
       </Grid>

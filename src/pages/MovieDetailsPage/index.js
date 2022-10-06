@@ -16,6 +16,8 @@ import ProvidersIcons from "../../components/ProvidersIcons";
 import ImageCarousel from "../../components/ImageCarousel";
 import CommentsList from "../../components/CommentsList";
 
+const API_URL = process.env.REACT_APP_SERVER_URL;
+
 const MovieDetailsPage = (props) => {
   const { user } = props;
   const { movieId } = useParams();
@@ -45,12 +47,35 @@ const MovieDetailsPage = (props) => {
       });
   }, [movieId]);
 
-  const addToWatchList = () => {
-    navigate("/myList");
+  const addToWatchList = (movieInfo) => {
+    const { title, genres, runtime, poster_path } = movieInfo;
+    console.log(title, genres, runtime, poster_path);
+
+    const categories = genres.map((genre) => genre.name);
+
+    const request = {
+      title,
+      categories,
+      progress: 0,
+      totalProgress: runtime,
+      ranking: 0,
+      img: `http://image.tmdb.org/t/p/w500${poster_path}`,
+      userId: user._id,
+    };
+    console.log(request);
+
+    axios
+      .post(`${API_URL}/myList/${movieId}/add`, request)
+      .then((response) => {
+        console.log(response.data);
+        navigate("/myList");
+      })
+      .catch((err) => console.log(err));
   };
 
   const { title, genres, vote_average, poster_path, overview } = movieDetails;
-  // console.log(movieDetails);
+  console.log(movieDetails);
+  console.log(poster_path);
   return (
     <section className="movie-details">
       <Grid container spacing={2}>
@@ -60,7 +85,9 @@ const MovieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="h6">GLOBAL RATING</Typography>
+          <Typography variant="h6" color="#fff">
+            GLOBAL RATING
+          </Typography>
           <Rating
             name="globlal-rating"
             value={vote_average / 2}
@@ -71,7 +98,9 @@ const MovieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={2}>
-          <Typography variant="h6">YOUR RATING</Typography>
+          <Typography variant="h6" color="#fff">
+            YOUR RATING
+          </Typography>
           <Rating name="your-rating" value={5} precision={0.5} />
           <Typography variant="subtitle1" color="#fff">
             10 / 10
@@ -112,7 +141,11 @@ const MovieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Button variant="outlined" color="custom" onClick={addToWatchList}>
+          <Button
+            variant="outlined"
+            color="custom"
+            onClick={() => addToWatchList(movieDetails)}
+          >
             + Add to your List
           </Button>
           <Button variant="outlined" color="custom">
