@@ -14,6 +14,8 @@ import Signup from "./pages/Signup";
 import Search from "./pages/Search";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MyListPage from "./pages/MyListPage";
+import ProfilePage from "./pages/ProfilePage";
+import EditProfilePage from "./pages/EditProfilePage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -96,6 +98,11 @@ export default function App() {
           element={<MovieDetailsPage user={user} />}
         />
         <Route path="/myList" element={<MyListPage userSession={user} />} />
+        <Route path="/profile" element={<ProfilePage userSession={user} />} />
+        <Route
+          path="/profile/edit"
+          element={<EditProfilePage userSession={user} />}
+        />
       </Routes>
       <Footer />
     </div>

@@ -59,11 +59,9 @@ const ListCard = (props) => {
       userId: userSession._id,
     };
     if (!rating.rank) {
-      console.log("creando ranking", newRating);
       axios
         .post(`${API_URL}/movie/${tmdbId}/ranking`, request)
         .then((rankCreated) => {
-          console.log(rankCreated);
           setRating({ ...rankCreated.data });
         })
         .catch((err) => console.log(err));
@@ -77,7 +75,6 @@ const ListCard = (props) => {
     }
   };
 
-  console.log(rating);
   return (
     <Paper
       sx={{

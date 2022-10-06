@@ -24,6 +24,7 @@ const MovieDetailsPage = (props) => {
   const [movieDetails, setMovieDetails] = useState({});
   const [trailer, setTrailer] = useState([]);
   const [ranking, setRanking] = useState({});
+  const [listStatus, setListStatus] = useState(false);
 
   const navigate = useNavigate();
 
@@ -48,6 +49,16 @@ const MovieDetailsPage = (props) => {
       });
   }, [movieId]);
 
+  // Check if the movie is already added in your list
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/myList/${movieId}/${user._id}/check`)
+      .then((response) => {
+        setListStatus(response.data);
+      })
+      .catch((err) => console.log(err));
+  }, [movieId, user]);
+
   // Get ratings from data base
   useEffect(() => {
     axios
@@ -67,26 +78,30 @@ const MovieDetailsPage = (props) => {
     const { title, genres, runtime, poster_path } = movieInfo;
     // console.log(title, genres, runtime, poster_path);
 
-    const categories = genres.map((genre) => genre.name);
+    if (!listStatus) {
+      const categories = genres.map((genre) => genre.name);
 
-    const request = {
-      title,
-      categories,
-      progress: 0,
-      totalProgress: runtime,
-      ranking: 0,
-      img: `http://image.tmdb.org/t/p/w500${poster_path}`,
-      userId: user._id,
-    };
-    console.log(request);
+      const request = {
+        title,
+        categories,
+        progress: 0,
+        totalProgress: runtime,
+        ranking: 0,
+        img: `http://image.tmdb.org/t/p/w500${poster_path}`,
+        userId: user._id,
+      };
+      console.log(request);
 
-    axios
-      .post(`${API_URL}/myList/${movieId}/add`, request)
-      .then((response) => {
-        console.log(response.data);
-        navigate("/myList");
-      })
-      .catch((err) => console.log(err));
+      axios
+        .post(`${API_URL}/myList/${movieId}/add`, request)
+        .then((response) => {
+          console.log(response.data);
+          navigate("/myList");
+        })
+        .catch((err) => console.log(err));
+    } else {
+      navigate("/myList");
+    }
   };
 
   const addRating = (newRating) => {
