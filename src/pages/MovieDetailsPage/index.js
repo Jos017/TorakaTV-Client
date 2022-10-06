@@ -23,6 +23,7 @@ const MovieDetailsPage = (props) => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState({});
   const [trailer, setTrailer] = useState([]);
+  const [ranking, setRanking] = useState({});
 
   const navigate = useNavigate();
 
@@ -47,9 +48,24 @@ const MovieDetailsPage = (props) => {
       });
   }, [movieId]);
 
+  // Get ratings from data base
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/movie/${movieId}/ranking/${user._id}`)
+      .then((response) => {
+        if (!response.data.length) {
+          const newRanking = {};
+          setRanking(newRanking);
+        } else {
+          const newRanking = response.data[0];
+          setRanking({ ...newRanking });
+        }
+      });
+  }, [movieId, user]);
+
   const addToWatchList = (movieInfo) => {
     const { title, genres, runtime, poster_path } = movieInfo;
-    console.log(title, genres, runtime, poster_path);
+    // console.log(title, genres, runtime, poster_path);
 
     const categories = genres.map((genre) => genre.name);
 
@@ -73,9 +89,33 @@ const MovieDetailsPage = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const addRating = (newRating) => {
+    const request = {
+      rank: newRating,
+      userId: user._id,
+    };
+    if (!ranking.rank) {
+      console.log("creando ranking", newRating);
+      axios
+        .post(`${API_URL}/movie/${movieId}/ranking`, request)
+        .then((rankCreated) => {
+          console.log(rankCreated);
+          setRanking({ ...rankCreated.data });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .put(`${API_URL}/movie/ranking/update/${ranking._id}`, request)
+        .then((rankUpdated) => {
+          setRanking({ ...rankUpdated.data });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   const { title, genres, vote_average, poster_path, overview } = movieDetails;
-  console.log(movieDetails);
-  console.log(poster_path);
+  // console.log(movieDetails);
+  // console.log(poster_path);
   return (
     <section className="movie-details">
       <Grid container spacing={2}>
@@ -92,6 +132,7 @@ const MovieDetailsPage = (props) => {
             name="globlal-rating"
             value={vote_average / 2}
             precision={0.5}
+            readOnly
           />
           <Typography variant="subtitle1" color="#fff">
             {vote_average?.toFixed(2)} / 10
@@ -101,9 +142,14 @@ const MovieDetailsPage = (props) => {
           <Typography variant="h6" color="#fff">
             YOUR RATING
           </Typography>
-          <Rating name="your-rating" value={5} precision={0.5} />
+          <Rating
+            name="your-rating"
+            value={ranking.rank ? ranking.rank / 2 : 0}
+            precision={0.5}
+            onChange={(event, newRanking) => addRating(newRanking * 2)}
+          />
           <Typography variant="subtitle1" color="#fff">
-            10 / 10
+            {ranking.rank ? ranking.rank : 0} / 10
           </Typography>
         </Grid>
         <Grid item xs={12}>

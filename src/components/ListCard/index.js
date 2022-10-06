@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+import axios from "axios";
 import { styled } from "@mui/material/styles";
 
 import Grid from "@mui/material/Grid";
@@ -10,6 +11,7 @@ import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import ProgressBar from "../ProgressBar";
 import StatusMenu from "../StatusMenu";
+import Rating from "@mui/material/Rating";
 
 const Img = styled("img")({
   margin: "auto",
@@ -18,18 +20,64 @@ const Img = styled("img")({
   maxHeight: "100%",
 });
 
+const API_URL = process.env.REACT_APP_SERVER_URL;
+
 const ListCard = (props) => {
   const {
     title,
     status,
     progress,
-    ranking,
     img,
+    tmdbId,
     totalProgress,
     categories,
     _id,
   } = props.info;
-  const { deleteListItem, updateListItem } = props;
+  const { deleteListItem, updateListItem, userSession } = props;
+
+  const [rating, setRating] = useState({});
+
+  // Obtain movie rating
+  useEffect(() => {
+    axios
+      .get(`${API_URL}/movie/${tmdbId}/ranking/${userSession._id}`)
+      .then((response) => {
+        if (!response.data.length) {
+          const newRanking = {};
+          setRating(newRanking);
+        } else {
+          const newRanking = response.data[0];
+          setRating({ ...newRanking });
+        }
+      });
+  }, [tmdbId, userSession]);
+
+  // Update and create Rating
+  const addRating = (newRating) => {
+    const request = {
+      rank: newRating,
+      userId: userSession._id,
+    };
+    if (!rating.rank) {
+      console.log("creando ranking", newRating);
+      axios
+        .post(`${API_URL}/movie/${tmdbId}/ranking`, request)
+        .then((rankCreated) => {
+          console.log(rankCreated);
+          setRating({ ...rankCreated.data });
+        })
+        .catch((err) => console.log(err));
+    } else {
+      axios
+        .put(`${API_URL}/movie/ranking/update/${rating._id}`, request)
+        .then((rankUpdated) => {
+          setRating({ ...rankUpdated.data });
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  console.log(rating);
   return (
     <Paper
       sx={{
@@ -58,7 +106,16 @@ const ListCard = (props) => {
               <Typography gutterBottom variant="h5" component="div">
                 {title}
               </Typography>
-              <Typography variant="body2">Ranking: {ranking}</Typography>
+              <Typography variant="body2">Ranking:</Typography>
+              <Rating
+                name="your-rating"
+                value={rating.rank ? rating.rank / 2 : 0}
+                precision={0.5}
+                onChange={(event, newRanking) => addRating(newRanking * 2)}
+              />
+              <Typography variant="subtitle1" color="#fff">
+                {rating.rank ? rating.rank : 0} / 10
+              </Typography>
               <Typography
                 variant="body2"
                 component="div"

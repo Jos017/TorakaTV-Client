@@ -34,7 +34,6 @@ const MyListPage = (props) => {
   };
 
   const updateListItem = (listItemId, request) => {
-    console.log(request);
     axios
       .put(`${API_URL}/myList/update/${listItemId}`, request)
       .then((response) => {
@@ -42,7 +41,6 @@ const MyListPage = (props) => {
       })
       .catch((err) => console.log(err));
   };
-
   return (
     <div className="my-list">
       {list.map((listItem) => {
@@ -51,6 +49,7 @@ const MyListPage = (props) => {
             info={{ ...listItem }}
             deleteListItem={deleteListItem}
             updateListItem={updateListItem}
+            userSession={userSession}
             key={listItem._id}
           />
         );
