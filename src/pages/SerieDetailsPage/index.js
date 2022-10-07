@@ -76,7 +76,6 @@ const SerieDetailsPage = (props) => {
 
   const addToWatchList = (movieInfo) => {
     const { name, genres, number_of_episodes, poster_path } = movieInfo;
-    // console.log(title, genres, runtime, poster_path);
 
     if (!listStatus) {
       const categories = genres.map((genre) => genre.name);
@@ -91,12 +90,10 @@ const SerieDetailsPage = (props) => {
         type: "serie",
         userId: user?._id,
       };
-      console.log(request);
 
       axios
         .post(`${API_URL}/myList/${serieId}/add`, request)
         .then((response) => {
-          console.log(response.data);
           navigate("/myList");
         })
         .catch((err) => console.log(err));
@@ -111,11 +108,9 @@ const SerieDetailsPage = (props) => {
       userId: user?._id,
     };
     if (!ranking.rank) {
-      console.log("creando ranking", newRating);
       axios
         .post(`${API_URL}/movie/${serieId}/ranking`, request)
         .then((rankCreated) => {
-          console.log(rankCreated);
           setRanking({ ...rankCreated.data });
         })
         .catch((err) => console.log(err));
@@ -130,12 +125,10 @@ const SerieDetailsPage = (props) => {
   };
 
   const { name, genres, vote_average, poster_path, overview } = serieDetails;
-  console.log(serieDetails);
-  // console.log(poster_path);
   return (
     <section className="movie-details">
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={8} marginTop={{ xs: 12, sm: 1 }}>
           <Typography variant="h2" color="#fff" fontWeight="Bold">
             {name}
           </Typography>
@@ -203,16 +196,15 @@ const SerieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Button
-            variant="outlined"
-            color="custom"
-            onClick={() => addToWatchList(serieDetails)}
-          >
-            + Add to your List
-          </Button>
-          <Button variant="outlined" color="custom">
-            Program into your calendar
-          </Button>
+          {user && (
+            <Button
+              variant="outlined"
+              color="custom"
+              onClick={() => addToWatchList(serieDetails)}
+            >
+              + Add to your List
+            </Button>
+          )}
         </Grid>
         <Grid item xs={1}>
           <Box
@@ -326,40 +318,6 @@ const SerieDetailsPage = (props) => {
             userSession={user}
           />
         </Grid>
-        <Grid item xs={1}>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs="auto">
-          <Typography variant="h5" color="#fff">
-            TOP CAST
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={12}></Grid>
       </Grid>
     </section>
   );

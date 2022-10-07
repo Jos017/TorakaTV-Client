@@ -60,3 +60,12 @@ form.login__form {
 .login-link:hover {
   color: #0f9585;
 }
+
+@media (max-width: 600px) {
+  form.login__form {
+    margin: 0 2rem;
+  }
+  .login-container {
+    margin-top: 3rem;
+  }
+}

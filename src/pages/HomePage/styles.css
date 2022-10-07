@@ -32,8 +32,11 @@
 }
 
 .track-image {
-  width: 20rem;
-  height: 20rem;
+  width: 25rem;
+  height: 25rem;
+  border-radius: 5rem;
+  overflow: hidden;
+  margin-right: 2rem;
 }
 
 .track-image img {

@@ -65,7 +65,6 @@ export default function App() {
   }
 
   const searchResults = (value) => {
-    // console.log("Searching: ", value);
     setSearch(value);
   };
 

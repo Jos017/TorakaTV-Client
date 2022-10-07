@@ -1,7 +1,7 @@
 .search {
   width: 100%;
   min-height: 100vh;
-  padding: 5rem 0;
+  padding: 5rem;
   background-color: #18191a;
 }
 
@@ -17,6 +17,10 @@
 }
 
 @media (max-width: 600px) {
+  .search {
+    padding: 5rem 1rem;
+  }
+
   .card-container .card-img {
     width: 100%;
   }

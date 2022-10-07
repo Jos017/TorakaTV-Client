@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
+import Typography from "@mui/material/Typography";
 
 const SeriesProvidersIcons = (props) => {
   const { serieId } = props;
@@ -26,19 +27,22 @@ const SeriesProvidersIcons = (props) => {
           buy: response.data.results[country].buy,
           subs: response.data.results[country].flatrate,
         };
-        // console.log(newProviders);
         setProviders({ ...newProviders });
       });
   }, [serieId, country]);
 
   return (
     <>
-      <Stack direction="row">
+      <Stack direction="row" margin={2}>
+        <Typography variant="h6" color="#FFF" marginRight="1rem">
+          For buying:
+        </Typography>
         {providers?.buy?.map((provider) => {
           return (
             <Link
               key={provider.provider_id}
               href={providersList[provider.provider_id]}
+              margin="0 0.5rem"
             >
               <Avatar
                 alt={provider.provider_name}
@@ -52,11 +56,15 @@ const SeriesProvidersIcons = (props) => {
         })}
       </Stack>
       <Stack direction="row">
+        <Typography variant="h6" color="#FFF" marginRight="1rem">
+          Subscription:
+        </Typography>
         {providers?.subs?.map((provider) => {
           return (
             <Link
               key={provider.provider_id}
               href={providersList[provider.provider_id]}
+              margin="0 0.5rem"
             >
               <Avatar
                 alt={provider.provider_name}

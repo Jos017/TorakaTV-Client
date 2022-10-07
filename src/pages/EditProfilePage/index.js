@@ -103,7 +103,13 @@ const EditProfilePage = (props) => {
 
   return (
     <div className="edit-profile-page">
-      <Stack direction="row" alignItems="center" spacing={3}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={3}
+        marginTop={{ xs: 12, sm: 1 }}
+        marginBottom={3}
+      >
         <Typography variant="h2" color="#fff" fontWeight="Bold">
           My Profile
         </Typography>

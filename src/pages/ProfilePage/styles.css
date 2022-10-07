@@ -6,7 +6,6 @@
 }
 
 .profile-img-container {
-  background-color: red;
   margin: 0 1rem 0 auto;
   border-radius: 1rem;
   overflow: hidden;
@@ -24,4 +23,10 @@
 .comments-section {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 5rem 1rem;
+  }
 }

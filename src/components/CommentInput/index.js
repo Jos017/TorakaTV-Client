@@ -30,7 +30,7 @@ const CommentInput = (props) => {
   }
   return (
     <div>
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleFormSubmit} className="comment-form">
         <TextareaAutosize
           className="comment-input"
           name="comment"

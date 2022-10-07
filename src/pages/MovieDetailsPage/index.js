@@ -76,7 +76,6 @@ const MovieDetailsPage = (props) => {
 
   const addToWatchList = (movieInfo) => {
     const { title, genres, runtime, poster_path } = movieInfo;
-    // console.log(title, genres, runtime, poster_path);
 
     if (!listStatus) {
       const categories = genres.map((genre) => genre.name);
@@ -109,11 +108,9 @@ const MovieDetailsPage = (props) => {
       userId: user?._id,
     };
     if (!ranking.rank) {
-      console.log("creando ranking", newRating);
       axios
         .post(`${API_URL}/movie/${movieId}/ranking`, request)
         .then((rankCreated) => {
-          console.log(rankCreated);
           setRanking({ ...rankCreated.data });
         })
         .catch((err) => console.log(err));
@@ -128,12 +125,10 @@ const MovieDetailsPage = (props) => {
   };
 
   const { title, genres, vote_average, poster_path, overview } = movieDetails;
-  // console.log(movieDetails);
-  // console.log(poster_path);
   return (
     <section className="movie-details">
       <Grid container spacing={2}>
-        <Grid item xs={8}>
+        <Grid item xs={8} marginTop={{ xs: 12, sm: 1 }}>
           <Typography variant="h2" color="#fff" fontWeight="Bold">
             {title}
           </Typography>
@@ -201,16 +196,15 @@ const MovieDetailsPage = (props) => {
           </Typography>
         </Grid>
         <Grid item xs={4}>
-          <Button
-            variant="outlined"
-            color="custom"
-            onClick={() => addToWatchList(movieDetails)}
-          >
-            + Add to your List
-          </Button>
-          <Button variant="outlined" color="custom">
-            Program into your calendar
-          </Button>
+          {user && (
+            <Button
+              variant="outlined"
+              color="custom"
+              onClick={() => addToWatchList(movieDetails)}
+            >
+              + Add to your List
+            </Button>
+          )}
         </Grid>
         <Grid item xs={1}>
           <Box
@@ -320,40 +314,6 @@ const MovieDetailsPage = (props) => {
         <Grid item xs={12}>
           <CommentsList movieId={movieId} color="#fff" userSession={user} />
         </Grid>
-        <Grid item xs={1}>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs="auto">
-          <Typography variant="h5" color="#fff">
-            TOP CAST
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs={12}></Grid>
       </Grid>
     </section>
   );

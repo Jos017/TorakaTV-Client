@@ -47,7 +47,13 @@ const ProfilePage = (props) => {
 
   return (
     <div className="profile-page">
-      <Stack direction="row" alignItems="center" spacing={3}>
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={3}
+        marginTop={{ xs: 12, sm: 1 }}
+        marginBottom={3}
+      >
         <Typography variant="h2" color="#fff" fontWeight="Bold">
           My Profile
         </Typography>
@@ -71,7 +77,7 @@ const ProfilePage = (props) => {
           margin: "0 auto",
         }}
       >
-        <Grid container borderRadius={3}>
+        <Grid container borderRadius={3} spacing={1}>
           <Grid item xs="auto" sx={{ margin: "0 auto" }}>
             <Paper className="profile-img-container" elevation={3}>
               <img src={avatar ? avatar : profilePic} alt="profile" />

@@ -13,12 +13,11 @@ const SerieImageCarousel = (props) => {
         const orderedImages = response.data.backdrops;
         orderedImages.sort((a, b) => b.vote_average - a.vote_average);
         const newImages = orderedImages.filter((image, index) => {
-          return index <= 7;
+          return index <= 9;
         });
         setImages([...newImages]);
       });
   }, [serieId]);
-  // console.log(images);
   return (
     <div>
       {images?.map((image) => {

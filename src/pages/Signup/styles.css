@@ -60,3 +60,12 @@ form.signup__form {
 .login-link:hover {
   color: #0f9585;
 }
+
+@media (max-width: 600px) {
+  form.signup__form {
+    margin: 0 2rem;
+  }
+  .signup-container {
+    margin-top: 5rem;
+  }
+}

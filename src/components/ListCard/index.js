@@ -82,6 +82,7 @@ const ListCard = (props) => {
       sx={{
         p: 2,
         margin: "1rem auto",
+        minWidth: 350,
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: "#242526",
@@ -90,7 +91,14 @@ const ListCard = (props) => {
     >
       <Grid container spacing={2} position="relative">
         <Grid item>
-          <Stack sx={{ width: 128, height: 180 }}>
+          <Stack
+            direction={{ xs: "row", sm: "column" }}
+            sx={{ width: 128, height: 150 }}
+            spacing={3}
+            alignItems="center"
+            marginTop={{ xs: 0, sm: 6 }}
+            marginLeft={{ xs: 12, sm: 0 }}
+          >
             <Img
               alt="complex"
               src={img}

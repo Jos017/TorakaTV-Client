@@ -48,6 +48,17 @@ const Search = (props) => {
 
   return (
     <div className="search">
+      <Stack
+        direction="row"
+        alignItems="center"
+        spacing={3}
+        marginTop={{ xs: 12, sm: 1 }}
+        marginBottom={3}
+      >
+        <Typography variant="h2" color="#fff" fontWeight="Bold">
+          My Profile
+        </Typography>
+      </Stack>
       <div className="card-container">
         {searchResult.map((movie) => {
           const { id, title, overview, poster_path, vote_average, genre_ids } =
