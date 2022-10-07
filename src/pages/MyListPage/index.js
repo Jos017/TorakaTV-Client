@@ -13,7 +13,7 @@ const MyListPage = (props) => {
   useEffect(() => {
     const getAllListItems = () => {
       axios
-        .get(`${API_URL}/myList/${userSession._id}`)
+        .get(`${API_URL}/myList/${userSession?._id}`)
         .then((response) => {
           setList(response.data);
         })
@@ -43,17 +43,18 @@ const MyListPage = (props) => {
   };
   return (
     <div className="my-list">
-      {list.map((listItem) => {
-        return (
-          <ListCard
-            info={{ ...listItem }}
-            deleteListItem={deleteListItem}
-            updateListItem={updateListItem}
-            userSession={userSession}
-            key={listItem._id}
-          />
-        );
-      })}
+      {userSession?.list &&
+        list.map((listItem) => {
+          return (
+            <ListCard
+              info={{ ...listItem }}
+              deleteListItem={deleteListItem}
+              updateListItem={updateListItem}
+              userSession={userSession}
+              key={listItem._id}
+            />
+          );
+        })}
     </div>
   );
 };

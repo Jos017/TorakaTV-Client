@@ -70,7 +70,7 @@ const EditProfilePage = (props) => {
                 <Grid container>
                   <Grid item xs={12}>
                     <FormControl
-                      variant="standar"
+                      variant="standard"
                       color="custom"
                       className="edit-form"
                     >
@@ -88,7 +88,7 @@ const EditProfilePage = (props) => {
                     </FormControl>
                   </Grid>
                   <Grid item xs={6}>
-                    <FormControl variant="standar" color="custom">
+                    <FormControl variant="standard" color="custom">
                       <InputLabel htmlFor="firstName">First Name</InputLabel>
                       <Input
                         id="firstName"
@@ -101,7 +101,7 @@ const EditProfilePage = (props) => {
                     </FormControl>
                   </Grid>
                   <Grid item xs={6}>
-                    <FormControl variant="standar" color="custom">
+                    <FormControl variant="standard" color="custom">
                       <InputLabel htmlFor="lastName">Last Name</InputLabel>
                       <Input
                         id="lastName"
@@ -114,7 +114,7 @@ const EditProfilePage = (props) => {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standar" color="custom">
+                    <FormControl variant="standard" color="custom">
                       <InputLabel htmlFor="email">Email</InputLabel>
                       <Input
                         id="email"
@@ -127,7 +127,7 @@ const EditProfilePage = (props) => {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standar" color="custom">
+                    <FormControl variant="standard" color="custom">
                       <InputLabel htmlFor="phone">Phone Number</InputLabel>
                       <Input
                         id="phone"
@@ -140,7 +140,7 @@ const EditProfilePage = (props) => {
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standar" color="custom">
+                    <FormControl variant="standard" color="custom">
                       <InputLabel htmlFor="about">About me</InputLabel>
                       <Input
                         id="about"

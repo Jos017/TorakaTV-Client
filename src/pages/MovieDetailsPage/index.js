@@ -52,7 +52,7 @@ const MovieDetailsPage = (props) => {
   // Check if the movie is already added in your list
   useEffect(() => {
     axios
-      .get(`${API_URL}/myList/${movieId}/${user._id}/check`)
+      .get(`${API_URL}/myList/${movieId}/${user?._id}/check`)
       .then((response) => {
         setListStatus(response.data);
       })
@@ -62,7 +62,7 @@ const MovieDetailsPage = (props) => {
   // Get ratings from data base
   useEffect(() => {
     axios
-      .get(`${API_URL}/movie/${movieId}/ranking/${user._id}`)
+      .get(`${API_URL}/movie/${movieId}/ranking/${user?._id}`)
       .then((response) => {
         if (!response.data.length) {
           const newRanking = {};
