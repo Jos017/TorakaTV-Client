@@ -68,6 +68,7 @@ const Navbar = (props) => {
       <SearchBar
         searchResults={props.searchResults}
         handleKeyUp={props.handleKeyUp}
+        search={props.search}
       />
       <div className="nav__authLinks">
         {/** Menu shown when a user is loged in */}
@@ -95,7 +96,6 @@ const Navbar = (props) => {
               role={undefined}
               placement="bottom-start"
               transition
-              disablePortal
             >
               {({ TransitionProps, placement }) => (
                 <Grow

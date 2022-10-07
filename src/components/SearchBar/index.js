@@ -46,14 +46,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const SearchBar = (props) => {
   const { searchResults, handleKeyUp } = props;
-  // const [search, setSearch] = useState("");
 
   function handleSearchChange(e) {
     const { value } = e.target;
     e.preventDefault();
     searchResults(value);
     return value;
-    // return setSearch(value);
   }
 
   return (

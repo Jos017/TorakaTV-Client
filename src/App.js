@@ -12,6 +12,7 @@ import LogIn from "./pages/LogIn";
 import Signup from "./pages/Signup";
 import Search from "./pages/Search";
 import MovieDetailsPage from "./pages/MovieDetailsPage";
+import SerieDetailsPage from "./pages/SerieDetailsPage";
 import MyListPage from "./pages/MyListPage";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
@@ -70,7 +71,9 @@ export default function App() {
 
   const handleKeyUp = (e) => {
     if (e.key === "Enter") {
-      navigate(`/search/${search}`);
+      const newSearch = search;
+      setSearch("");
+      navigate(`/search/${newSearch}`);
     }
   };
 
@@ -80,6 +83,7 @@ export default function App() {
         handleLogout={handleLogout}
         searchResults={searchResults}
         handleKeyUp={handleKeyUp}
+        search={search}
         user={user}
       />
       <Routes>
@@ -96,6 +100,10 @@ export default function App() {
         <Route
           path="/movie/:movieId"
           element={<MovieDetailsPage user={user} />}
+        />
+        <Route
+          path="/serie/:serieId"
+          element={<SerieDetailsPage user={user} />}
         />
         <Route
           path="/myList"

@@ -4,8 +4,8 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Link from "@mui/material/Link";
 
-const ProvidersIcons = (props) => {
-  const { movieId } = props;
+const SeriesProvidersIcons = (props) => {
+  const { serieId } = props;
   const [providers, setProviders] = useState([]);
   const [country, setCountry] = useState("MX");
   const providersList = {
@@ -19,7 +19,7 @@ const ProvidersIcons = (props) => {
   useEffect(() => {
     axios
       .get(
-        `https://api.themoviedb.org/3/movie/${movieId}/watch/providers?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
+        `https://api.themoviedb.org/3/tv/${serieId}/watch/providers?api_key=${process.env.REACT_APP_TMDB_API_KEY}`
       )
       .then((response) => {
         const newProviders = {
@@ -29,7 +29,7 @@ const ProvidersIcons = (props) => {
         // console.log(newProviders);
         setProviders({ ...newProviders });
       });
-  }, [movieId, country]);
+  }, [serieId, country]);
 
   return (
     <>
@@ -73,4 +73,4 @@ const ProvidersIcons = (props) => {
   );
 };
 
-export default ProvidersIcons;
+export default SeriesProvidersIcons;
