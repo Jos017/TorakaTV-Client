@@ -1,13 +1,12 @@
 import "./styles.css";
 import profilePic from "../../images/profile-default.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
-import TextField from "@mui/material/TextField";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputAdornment from "@mui/material/InputAdornment";
 import Input from "@mui/material/Input";
@@ -15,15 +14,56 @@ import InputLabel from "@mui/material/InputLabel";
 import LiveTvIcon from "@mui/icons-material/LiveTv";
 import CommentIcon from "@mui/icons-material/Comment";
 import StarIcon from "@mui/icons-material/Star";
-import { FormControl } from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+
+const inputStyle = {
+  "& label": { color: "#fff" },
+  "&:hover label": { color: "#0f9585" },
+  "& label.Mui-focused": { color: "#13c6b2" },
+  "& .MuiInputAdornment-root": {
+    color: "#fff",
+  },
+  "& .MuiInput-underline:before": {
+    borderBottomColor: "#fff",
+  },
+  "&:hover .MuiInput-underline:before": {
+    borderBottomColor: "#0f9585",
+    borderWidth: 1,
+  },
+  margin: "1rem",
+};
 
 const EditProfilePage = (props) => {
   const { userSession } = props;
+  console.log(userSession);
   const navigate = useNavigate();
+
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [about, setAbout] = useState("");
+
+  useEffect(() => {
+    userSession?.username && setUsername(userSession.username);
+    userSession?.firsFName && setFirstName(userSession.firstName);
+    userSession?.lasLName && setLastName(userSession.lastName);
+    userSession?.email && setEmail(userSession.email);
+    userSession?.phone && setPhone(userSession.phone);
+    userSession?.about && setAbout(userSession.about);
+  }, [userSession]);
+
   const handleCancel = () => {
     navigate("/profile");
   };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const request = { username, firstName, lastName, email, phone, about };
+    console.log(request);
+  };
+  console.log(username);
   return (
     <div className="edit-profile-page">
       <Stack direction="row" alignItems="center" spacing={3}>
@@ -33,6 +73,14 @@ const EditProfilePage = (props) => {
         <Button
           variant="contained"
           color="custom"
+          size="small"
+          onClick={() => console.log("actualizar")}
+        >
+          Save
+        </Button>
+        <Button
+          variant="contained"
+          color="error"
           size="small"
           onClick={handleCancel}
         >
@@ -66,13 +114,14 @@ const EditProfilePage = (props) => {
                 height: "100%",
               }}
             >
-              <form className="edit-profile-form">
+              <form className="edit-profile-form" onSubmit={handleFormSubmit}>
                 <Grid container>
                   <Grid item xs={12}>
                     <FormControl
                       variant="standard"
                       color="custom"
                       className="edit-form"
+                      sx={{ ...inputStyle, width: "90%" }}
                     >
                       <InputLabel htmlFor="username" className="edit-input">
                         Username
@@ -84,11 +133,18 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={6}>
-                    <FormControl variant="standard" color="custom">
+                    <FormControl
+                      variant="standard"
+                      color="custom"
+                      sx={{ ...inputStyle, width: "80%" }}
+                    >
                       <InputLabel htmlFor="firstName">First Name</InputLabel>
                       <Input
                         id="firstName"
@@ -97,11 +153,18 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={6}>
-                    <FormControl variant="standard" color="custom">
+                    <FormControl
+                      variant="standard"
+                      color="custom"
+                      sx={{ ...inputStyle, width: "80%" }}
+                    >
                       <InputLabel htmlFor="lastName">Last Name</InputLabel>
                       <Input
                         id="lastName"
@@ -110,11 +173,18 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standard" color="custom">
+                    <FormControl
+                      variant="standard"
+                      color="custom"
+                      sx={{ ...inputStyle, width: "90%" }}
+                    >
                       <InputLabel htmlFor="email">Email</InputLabel>
                       <Input
                         id="email"
@@ -123,11 +193,18 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standard" color="custom">
+                    <FormControl
+                      variant="standard"
+                      color="custom"
+                      sx={{ ...inputStyle, width: "90%" }}
+                    >
                       <InputLabel htmlFor="phone">Phone Number</InputLabel>
                       <Input
                         id="phone"
@@ -136,11 +213,18 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                   <Grid item xs={12}>
-                    <FormControl variant="standard" color="custom">
+                    <FormControl
+                      variant="standard"
+                      color="custom"
+                      sx={{ ...inputStyle, width: "90%" }}
+                    >
                       <InputLabel htmlFor="about">About me</InputLabel>
                       <Input
                         id="about"
@@ -149,29 +233,14 @@ const EditProfilePage = (props) => {
                             <AccountCircle />
                           </InputAdornment>
                         }
+                        sx={{ color: "#fff" }}
+                        value={about}
+                        onChange={(e) => setAbout(e.target.value)}
                       />
                     </FormControl>
                   </Grid>
                 </Grid>
               </form>
-              <Typography variant="h5" color="#fff">
-                {userSession.firstName} {userSession.lastName}
-              </Typography>
-              <Typography variant="subtitle1" component="div" color="#4e4f50">
-                @{userSession.username}
-              </Typography>
-              <Typography variant="body1" component="div" color="#fff">
-                <span style={{ color: "#13c6b2" }}>Email: </span>
-                <span>{userSession.email}</span>
-              </Typography>
-              <Typography variant="body1" component="div" color="#fff">
-                <span style={{ color: "#13c6b2" }}>Phone Number: </span>
-                <span>{userSession.phone}</span>
-              </Typography>
-              <Typography variant="body1" component="div" color="#fff">
-                <span style={{ color: "#13c6b2" }}>About me: </span>
-                <span>{userSession.about}</span>
-              </Typography>
             </Paper>
           </Grid>
           <Grid item xs={12}>
@@ -190,7 +259,7 @@ const EditProfilePage = (props) => {
                 <LiveTvIcon color="custom" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.list.length} Items
+                    {userSession?.list.length} Items
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Series and Movies Tracked
@@ -201,7 +270,7 @@ const EditProfilePage = (props) => {
                 <CommentIcon color="error" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.comments.length} Comments
+                    {userSession?.comments.length} Comments
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Comments made
@@ -212,7 +281,7 @@ const EditProfilePage = (props) => {
                 <StarIcon color="warning" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.ranking.length} Ratings
+                    {userSession?.ranking.length} Ratings
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Series and Movies Rated

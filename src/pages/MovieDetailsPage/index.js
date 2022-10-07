@@ -88,7 +88,7 @@ const MovieDetailsPage = (props) => {
         totalProgress: runtime,
         ranking: 0,
         img: `http://image.tmdb.org/t/p/w500${poster_path}`,
-        userId: user._id,
+        userId: user?._id,
       };
       console.log(request);
 
@@ -107,7 +107,7 @@ const MovieDetailsPage = (props) => {
   const addRating = (newRating) => {
     const request = {
       rank: newRating,
-      userId: user._id,
+      userId: user?._id,
     };
     if (!ranking.rank) {
       console.log("creando ranking", newRating);

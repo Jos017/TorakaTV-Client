@@ -1,11 +1,12 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
-const ProtectedPage = () => {
-  return (
-    <div>
-      <h1>This page is hyper protected!</h1>
-    </div>
-  );
+const ProtectedPage = (props) => {
+  const { userSession, children } = props;
+  if (!userSession) {
+    return <Navigate to="/" replace />;
+  }
+  return children;
 };
 
 export default ProtectedPage;

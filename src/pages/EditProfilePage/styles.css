@@ -25,11 +25,3 @@
   display: flex;
   justify-content: space-between;
 }
-
-.edit-profile-form .edit-input {
-  color: #fff;
-}
-
-.edit-input:hover {
-  color: red;
-}

@@ -60,22 +60,22 @@ const ProfilePage = (props) => {
               }}
             >
               <Typography variant="h5" color="#fff">
-                {userSession.firstName} {userSession.lastName}
+                {userSession?.firstName} {userSession?.lastName}
               </Typography>
               <Typography variant="subtitle1" component="div" color="#4e4f50">
-                @{userSession.username}
+                @{userSession?.username}
               </Typography>
               <Typography variant="body1" component="div" color="#fff">
                 <span style={{ color: "#13c6b2" }}>Email: </span>
-                <span>{userSession.email}</span>
+                <span>{userSession?.email}</span>
               </Typography>
               <Typography variant="body1" component="div" color="#fff">
                 <span style={{ color: "#13c6b2" }}>Phone Number: </span>
-                <span>{userSession.phone}</span>
+                <span>{userSession?.phone}</span>
               </Typography>
               <Typography variant="body1" component="div" color="#fff">
                 <span style={{ color: "#13c6b2" }}>About me: </span>
-                <span>{userSession.about}</span>
+                <span>{userSession?.about}</span>
               </Typography>
             </Paper>
           </Grid>
@@ -95,7 +95,7 @@ const ProfilePage = (props) => {
                 <LiveTvIcon color="custom" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.list.length} Items
+                    {userSession?.list.length} Items
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Series and Movies Tracked
@@ -106,7 +106,7 @@ const ProfilePage = (props) => {
                 <CommentIcon color="error" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.comments.length} Comments
+                    {userSession?.comments.length} Comments
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Comments made
@@ -117,7 +117,7 @@ const ProfilePage = (props) => {
                 <StarIcon color="warning" fontSize="large" />
                 <Stack>
                   <Typography variant="body1" color="#fff" component="div">
-                    {userSession.ranking.length} Ratings
+                    {userSession?.ranking.length} Ratings
                   </Typography>
                   <Typography variant="body1" color="#fff" component="div">
                     Total Series and Movies Rated

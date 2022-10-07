@@ -94,7 +94,7 @@ const CommentsList = (props) => {
             </Grid>
             <Grid item xs>
               <Typography variant="body1" color="#fff">
-                {user.username}
+                {user?.username}
               </Typography>
               <Typography variant="body1" color="#fff">
                 {updatedAt
@@ -103,7 +103,7 @@ const CommentsList = (props) => {
               </Typography>
             </Grid>
             <Grid item xs="auto">
-              {userSession._id === user._id && (
+              {userSession?._id === user?._id && (
                 <MenuDial
                   editComment={editComment}
                   deleteComment={deleteComment}

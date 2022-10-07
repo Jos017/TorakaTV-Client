@@ -16,6 +16,7 @@ import MovieDetailsPage from "./pages/MovieDetailsPage";
 import MyListPage from "./pages/MyListPage";
 import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
+import ProtectedPage from "./pages/ProtectedPage";
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -97,11 +98,29 @@ export default function App() {
           path="/movie/:movieId"
           element={<MovieDetailsPage user={user} />}
         />
-        <Route path="/myList" element={<MyListPage userSession={user} />} />
-        <Route path="/profile" element={<ProfilePage userSession={user} />} />
+        <Route
+          path="/myList"
+          element={
+            <ProtectedPage userSession={user}>
+              <MyListPage userSession={user} />
+            </ProtectedPage>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedPage userSession={user}>
+              <ProfilePage userSession={user} />
+            </ProtectedPage>
+          }
+        />
         <Route
           path="/profile/edit"
-          element={<EditProfilePage userSession={user} />}
+          element={
+            <ProtectedPage userSession={user}>
+              <EditProfilePage userSession={user} />
+            </ProtectedPage>
+          }
         />
       </Routes>
       <Footer />
