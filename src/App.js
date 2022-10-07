@@ -4,7 +4,6 @@ import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import { getLoggedIn, logout } from "./services/auth";
-import routes from "./config/routes";
 import * as USER_HELPERS from "./utils/userToken";
 
 // Import pages

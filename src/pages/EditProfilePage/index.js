@@ -1,5 +1,6 @@
 import "./styles.css";
 import profilePic from "../../images/profile-default.png";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
@@ -15,6 +16,8 @@ import LiveTvIcon from "@mui/icons-material/LiveTv";
 import CommentIcon from "@mui/icons-material/Comment";
 import StarIcon from "@mui/icons-material/Star";
 import FormControl from "@mui/material/FormControl";
+
+const API_URL = process.env.REACT_APP_SERVER_URL;
 
 const inputStyle = {
   "& label": { color: "#fff" },
@@ -35,7 +38,6 @@ const inputStyle = {
 
 const EditProfilePage = (props) => {
   const { userSession } = props;
-  console.log(userSession);
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -44,14 +46,21 @@ const EditProfilePage = (props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [about, setAbout] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   useEffect(() => {
-    userSession?.username && setUsername(userSession.username);
-    userSession?.firsFName && setFirstName(userSession.firstName);
-    userSession?.lasLName && setLastName(userSession.lastName);
-    userSession?.email && setEmail(userSession.email);
-    userSession?.phone && setPhone(userSession.phone);
-    userSession?.about && setAbout(userSession.about);
+    axios
+      .get(`${API_URL}/user/${userSession._id}`)
+      .then((response) => {
+        response.data.username && setUsername(response.data.username);
+        response.data.firstName && setFirstName(response.data.firstName);
+        response.data.lastName && setLastName(response.data.lastName);
+        response.data.email && setEmail(response.data.email);
+        response.data.phone && setPhone(response.data.phone);
+        response.data.about && setAbout(response.data.about);
+        response.data.avatar && setAvatar(response.data.avatar);
+      })
+      .catch((err) => console.log(err));
   }, [userSession]);
 
   const handleCancel = () => {
@@ -60,10 +69,21 @@ const EditProfilePage = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const request = { username, firstName, lastName, email, phone, about };
-    console.log(request);
+    const request = {
+      userId: userSession._id,
+      username,
+      firstName,
+      lastName,
+      email,
+      phone,
+      about,
+      avatar,
+    };
+    axios
+      .put(`${API_URL}/user/edit`, request)
+      .then(navigate("/profile", { replace: true }))
+      .catch((err) => console.log(err));
   };
-  console.log(username);
   return (
     <div className="edit-profile-page">
       <Stack direction="row" alignItems="center" spacing={3}>
@@ -74,7 +94,7 @@ const EditProfilePage = (props) => {
           variant="contained"
           color="custom"
           size="small"
-          onClick={() => console.log("actualizar")}
+          onClick={handleFormSubmit}
         >
           Save
         </Button>
@@ -101,7 +121,7 @@ const EditProfilePage = (props) => {
         <Grid container borderRadius={3}>
           <Grid item xs="auto" sx={{ margin: "0 auto" }}>
             <Paper className="profile-img-container" elevation={3}>
-              <img src={profilePic} alt="profile" />
+              <img src={avatar ? avatar : profilePic} alt="profile" />
             </Paper>
           </Grid>
           <Grid item xs>
