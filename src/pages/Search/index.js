@@ -56,7 +56,7 @@ const Search = (props) => {
         marginBottom={3}
       >
         <Typography variant="h2" color="#fff" fontWeight="Bold">
-          My Profile
+          Your Search Result
         </Typography>
       </Stack>
       <div className="card-container">
