@@ -84,6 +84,23 @@ const EditProfilePage = (props) => {
       .then(navigate("/profile", { replace: true }))
       .catch((err) => console.log(err));
   };
+
+  const handleOpenWidget = () => {
+    let myWidget = window.cloudinary.createUploadWidget(
+      {
+        cloudName: `${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}`,
+        uploadPreset: `${process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET}`,
+      },
+      (error, result) => {
+        if (!error && result && result.event === "success") {
+          setAvatar(result.info.url);
+        }
+      }
+    );
+    // open widget
+    myWidget.open();
+  };
+
   return (
     <div className="edit-profile-page">
       <Stack direction="row" alignItems="center" spacing={3}>
@@ -123,6 +140,16 @@ const EditProfilePage = (props) => {
             <Paper className="profile-img-container" elevation={3}>
               <img src={avatar ? avatar : profilePic} alt="profile" />
             </Paper>
+            <Stack>
+              <button
+                id="upload-widget"
+                className="cloudinary-button"
+                onClick={() => handleOpenWidget()}
+                style={{ backgroundColor: "#13c6b2", margin: "2rem auto" }}
+              >
+                Change Profile Image
+              </button>
+            </Stack>
           </Grid>
           <Grid item xs>
             <Paper
