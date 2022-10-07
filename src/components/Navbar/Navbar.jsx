@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import * as PATHS from "../../utils/paths";
-import * as CONSTS from "../../utils/consts";
 import logo from "../../images/logo.png";
 import profileDefault from "../../images/profile-default.png";
 import SearchBar from "../SearchBar";
@@ -29,7 +28,10 @@ const Navbar = (props) => {
             <Link to={PATHS.PROTECTEDPAGE} className="authLink">
               {/* Protected Page */}
             </Link>
-            <Avatar src={profileDefault} alt="avatar" />
+            <Avatar
+              src={props.user.avatar ? props.user.avatar : profileDefault}
+              alt="avatar"
+            />
             <button className="nav-logoutbtn" onClick={props.handleLogout}>
               Logout
             </button>
