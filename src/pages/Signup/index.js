@@ -142,7 +142,7 @@ export default function Signup({ authenticate }) {
             />
           </FormControl>
 
-          <FormControl color="custom">
+          {/* <FormControl color="custom">
             <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
             <OutlinedInput
               id="confirm-password"
@@ -166,7 +166,7 @@ export default function Signup({ authenticate }) {
               required
               minLength="8"
             />
-          </FormControl>
+          </FormControl> */}
 
           {error && (
             <div className="error-block">

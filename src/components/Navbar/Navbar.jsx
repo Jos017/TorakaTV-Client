@@ -147,13 +147,13 @@ const Navbar = (props) => {
                           </ListItemIcon>
                           Edit Profile
                         </MenuItem>
-                        <MenuItem>
-                          <ListItemIcon
-                            onClick={(e) => {
-                              handleClose(e);
-                              props.handleLogout(e);
-                            }}
-                          >
+                        <MenuItem
+                          onClick={(e) => {
+                            handleClose(e);
+                            props.handleLogout(e);
+                          }}
+                        >
+                          <ListItemIcon>
                             <Logout />
                           </ListItemIcon>
                           Logout
