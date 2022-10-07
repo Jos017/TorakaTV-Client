@@ -12,6 +12,7 @@ import Button from "@mui/material/Button";
 import ProgressBar from "../ProgressBar";
 import StatusMenu from "../StatusMenu";
 import Rating from "@mui/material/Rating";
+import { useNavigate } from "react-router-dom";
 
 const Img = styled("img")({
   margin: "auto",
@@ -35,7 +36,7 @@ const ListCard = (props) => {
     _id,
   } = props.info;
   const { deleteListItem, updateListItem, userSession } = props;
-
+  const navigate = useNavigate();
   const [rating, setRating] = useState({});
 
   // Obtain movie rating
@@ -90,7 +91,14 @@ const ListCard = (props) => {
       <Grid container spacing={2} position="relative">
         <Grid item>
           <Stack sx={{ width: 128, height: 180 }}>
-            <Img alt="complex" src={img} width="auto" height="100%" />
+            <Img
+              alt="complex"
+              src={img}
+              width="auto"
+              height="100%"
+              onClick={() => navigate(`/${type}/${tmdbId}`)}
+              sx={{ cursor: "pointer" }}
+            />
             <StatusMenu
               updateListItem={updateListItem}
               listItemId={_id}
