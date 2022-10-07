@@ -88,14 +88,13 @@ const MovieDetailsPage = (props) => {
         totalProgress: runtime,
         ranking: 0,
         img: `http://image.tmdb.org/t/p/w500${poster_path}`,
+        type: "movie",
         userId: user?._id,
       };
-      console.log(request);
 
       axios
         .post(`${API_URL}/myList/${movieId}/add`, request)
         .then((response) => {
-          console.log(response.data);
           navigate("/myList");
         })
         .catch((err) => console.log(err));

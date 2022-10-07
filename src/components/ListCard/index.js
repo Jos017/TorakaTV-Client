@@ -31,6 +31,7 @@ const ListCard = (props) => {
     tmdbId,
     totalProgress,
     categories,
+    type,
     _id,
   } = props.info;
   const { deleteListItem, updateListItem, userSession } = props;
@@ -138,7 +139,7 @@ const ListCard = (props) => {
                 initialValue={progress}
                 min={0}
                 max={totalProgress}
-                unit="min"
+                unit={type === "movie" ? "min" : "ep"}
                 updateListItem={updateListItem}
                 listItemId={_id}
               />

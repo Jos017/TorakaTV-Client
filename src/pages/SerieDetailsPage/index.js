@@ -75,19 +75,20 @@ const SerieDetailsPage = (props) => {
   }, [serieId, user]);
 
   const addToWatchList = (movieInfo) => {
-    const { name, genres, runtime, poster_path } = movieInfo;
+    const { name, genres, number_of_episodes, poster_path } = movieInfo;
     // console.log(title, genres, runtime, poster_path);
 
     if (!listStatus) {
       const categories = genres.map((genre) => genre.name);
 
       const request = {
-        name,
+        title: name,
         categories,
         progress: 0,
-        totalProgress: runtime,
+        totalProgress: number_of_episodes,
         ranking: 0,
         img: `http://image.tmdb.org/t/p/w500${poster_path}`,
+        type: "serie",
         userId: user?._id,
       };
       console.log(request);
@@ -129,7 +130,7 @@ const SerieDetailsPage = (props) => {
   };
 
   const { name, genres, vote_average, poster_path, overview } = serieDetails;
-  // console.log(movieDetails);
+  console.log(serieDetails);
   // console.log(poster_path);
   return (
     <section className="movie-details">
