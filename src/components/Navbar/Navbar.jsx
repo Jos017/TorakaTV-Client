@@ -151,7 +151,7 @@ const Navbar = (props) => {
                           <ListItemIcon
                             onClick={(e) => {
                               handleClose(e);
-                              props.handleLogout();
+                              props.handleLogout(e);
                             }}
                           >
                             <Logout />
@@ -164,10 +164,6 @@ const Navbar = (props) => {
                 </Grow>
               )}
             </Popper>
-
-            <button className="nav-logoutbtn" onClick={props.handleLogout}>
-              Logout
-            </button>
           </Stack>
         ) : (
           <>

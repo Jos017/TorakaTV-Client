@@ -90,7 +90,7 @@ export default function Signup({ authenticate }) {
           TorakaTV
         </Typograpy>
         <form onSubmit={handleFormSubmission} className="signup__form">
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="input-email">Email</InputLabel>
             <OutlinedInput
               id="input-email"
@@ -103,7 +103,7 @@ export default function Signup({ authenticate }) {
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="input-username">Username</InputLabel>
             <OutlinedInput
               id="input-username"
@@ -116,7 +116,7 @@ export default function Signup({ authenticate }) {
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="input-password">Password</InputLabel>
             <OutlinedInput
               id="input-password"
@@ -132,7 +132,7 @@ export default function Signup({ authenticate }) {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
@@ -142,7 +142,7 @@ export default function Signup({ authenticate }) {
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="confirm-password">Confirm Password</InputLabel>
             <OutlinedInput
               id="confirm-password"
@@ -158,7 +158,7 @@ export default function Signup({ authenticate }) {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
+                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }

@@ -20,7 +20,7 @@ export default function LogIn({ authenticate }) {
   const [form, setForm] = useState({
     username: "",
     password: "",
-    showPassword: "false",
+    showPassword: false,
   });
   const { username, password, showPassword } = form;
   const [error, setError] = useState(null);
@@ -69,7 +69,7 @@ export default function LogIn({ authenticate }) {
           TorakaTV
         </Typograpy>
         <form onSubmit={handleFormSubmission} className="login__form">
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="input-username">Username</InputLabel>
             <OutlinedInput
               id="input-username"
@@ -82,7 +82,7 @@ export default function LogIn({ authenticate }) {
             />
           </FormControl>
 
-          <FormControl>
+          <FormControl color="custom">
             <InputLabel htmlFor="input-password">Password</InputLabel>
             <OutlinedInput
               id="input-password"
@@ -98,7 +98,7 @@ export default function LogIn({ authenticate }) {
                     onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                    {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               }
