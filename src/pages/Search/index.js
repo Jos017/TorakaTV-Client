@@ -6,21 +6,26 @@ import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import SearchCardMovie from "../../components/SearchCardMovie";
 import SearchCardSerie from "../../components/SearchCardSerie";
+import SearchSkeleton from "../../components/SearchSkeleton";
 
 const Search = (props) => {
   const { search } = useParams();
 
   const [searchResult, setSearchResult] = useState([]);
   const [serieSearch, setSerieSearch] = useState([]);
+  const [isLoadingMovies, setIsLoadingMovies] = useState(false);
+  const [isLoadingSeries, setIsLoadingSeries] = useState(false);
 
   useEffect(() => {
     const movieSearch = () => {
+      setIsLoadingMovies(true);
       axios
         .get(
           `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${search}`
         )
         .then((response) => {
           setSearchResult(response.data.results);
+          setIsLoadingMovies(false);
         })
         .catch((err) => console.log(err));
     };
@@ -29,12 +34,14 @@ const Search = (props) => {
 
   useEffect(() => {
     const searchSerie = () => {
+      setIsLoadingSeries();
       axios
         .get(
           `https://api.themoviedb.org/3/search/tv?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&query=${search}`
         )
         .then((response) => {
           setSerieSearch(response.data.results);
+          setIsLoadingSeries();
         })
         .catch((err) => console.log(err));
     };
@@ -50,19 +57,57 @@ const Search = (props) => {
         marginTop={{ xs: 12, sm: 1 }}
         marginBottom={3}
       >
-        <Typography variant="h2" color="#fff" fontWeight="Bold">
+        <Typography variant="h2" color="#fff" fontWeight="bold">
           Your Search Result
         </Typography>
       </Stack>
-      <div className="card-container">
-        {searchResult.map((movie) => {
-          return <SearchCardMovie key={movie.id} movie={movie} />;
-        })}
+      <Typography
+        variant="h4"
+        component="h3"
+        color="#fff"
+        mb={2}
+        textAlign="center"
+        fontWeight="bold"
+      >
+        Movies
+      </Typography>
+      <div className="card-container" style={{ marginBottom: "2rem" }}>
+        {isLoadingMovies ? (
+          <>
+            <SearchSkeleton />
+            <SearchSkeleton />
+          </>
+        ) : (
+          <>
+            {searchResult.map((movie) => {
+              return <SearchCardMovie key={movie.id} movie={movie} />;
+            })}
+          </>
+        )}
       </div>
+      <Typography
+        variant="h4"
+        component="h3"
+        color="#fff"
+        mb={2}
+        textAlign="center"
+        fontWeight="bold"
+      >
+        Series
+      </Typography>
       <div className="card-container">
-        {serieSearch.map((serie) => {
-          return <SearchCardSerie key={serie.id} serie={serie} />;
-        })}
+        {isLoadingSeries ? (
+          <>
+            <SearchSkeleton />
+            <SearchSkeleton />
+          </>
+        ) : (
+          <>
+            {serieSearch.map((serie) => {
+              return <SearchCardSerie key={serie.id} serie={serie} />;
+            })}
+          </>
+        )}
       </div>
     </div>
   );
