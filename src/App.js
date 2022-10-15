@@ -66,14 +66,7 @@ export default function App() {
 
   const searchResults = (value) => {
     setSearch(value);
-  };
-
-  const handleKeyUp = (e) => {
-    if (e.key === "Enter") {
-      const newSearch = search;
-      setSearch("");
-      navigate(`/search/${newSearch}`);
-    }
+    navigate(`/search/${value}`);
   };
 
   return (
@@ -81,7 +74,6 @@ export default function App() {
       <Navbar
         handleLogout={handleLogout}
         searchResults={searchResults}
-        handleKeyUp={handleKeyUp}
         search={search}
         user={user}
       />
