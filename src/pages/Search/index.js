@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./styles.css";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
-import SerieCreditsSubtitle from "../../components/SerieCreditsSubtitle";
-import Rating from "@mui/material/Rating";
-import GenresChip from "../../components/GenresChip";
-import GenresSeriesChip from "../../components/GenresSeriesChip";
+import SearchCardMovie from "../../components/SearchCardMovie";
+import SearchCardSerie from "../../components/SearchCardSerie";
 
 const Search = (props) => {
   const { search } = useParams();
@@ -61,132 +56,12 @@ const Search = (props) => {
       </Stack>
       <div className="card-container">
         {searchResult.map((movie) => {
-          const { id, title, overview, poster_path, vote_average, genre_ids } =
-            movie;
-          return (
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              backgroundColor="#242526"
-              width={{ xs: "90%", md: "75%", xl: "45%" }}
-              height={{ xs: "auto", md: "fit-contain" }}
-              borderRadius="10px"
-              overflow="hidden"
-              key={id}
-            >
-              <CardMedia
-                className="card-img"
-                component="img"
-                alt={title}
-                image={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                sx={{ width: 200 }}
-              />
-
-              <Stack justifyContent="space-between" padding="1rem">
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  color="#fff"
-                >
-                  {title}
-                </Typography>
-                <Stack direction="row" spacing={1}>
-                  <GenresChip movieGenresId={genre_ids} />
-                  <Rating value={vote_average / 10} max={1} />
-                  <Typography variant="subtitle2" color="#fff">
-                    {vote_average}/<span style={{ color: "#8b96a0" }}>10</span>
-                  </Typography>
-                </Stack>
-                <Stack>
-                  <Typography variant="body2" color="#8b96a0">
-                    {overview}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    component={"span"}
-                    color="#8b96a0"
-                  >
-                    <MovieCreditsSubtitle movieId={id} />
-                  </Typography>
-                </Stack>
-                <Link to={`/movie/${id}`} className="search-link">
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="custom"
-                    sx={{ width: "fit-content" }}
-                  >
-                    More Details
-                  </Button>
-                </Link>
-              </Stack>
-            </Stack>
-          );
+          return <SearchCardMovie key={movie.id} movie={movie} />;
         })}
       </div>
       <div className="card-container">
         {serieSearch.map((serie) => {
-          const { id, name, overview, poster_path, vote_average, genre_ids } =
-            serie;
-          return (
-            <Stack
-              direction={{ xs: "column", sm: "row" }}
-              backgroundColor="#242526"
-              width={{ xs: "90%", md: "75%", xl: "45%" }}
-              height={{ xs: "auto", md: "fit-contain" }}
-              borderRadius="10px"
-              overflow="hidden"
-              key={id}
-            >
-              <CardMedia
-                className="card-img"
-                component="img"
-                alt={name}
-                image={`http://image.tmdb.org/t/p/w500${poster_path}`}
-                sx={{ width: 200 }}
-              />
-
-              <Stack justifyContent="space-between" padding="1rem">
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  color="#fff"
-                >
-                  {name}
-                </Typography>
-                <Stack direction="row" spacing={1}>
-                  <GenresSeriesChip serieGenresId={genre_ids} />
-                  <Rating value={vote_average / 10} max={1} />
-                  <Typography variant="subtitle2" color="#fff">
-                    {vote_average}/<span style={{ color: "#8b96a0" }}>10</span>
-                  </Typography>
-                </Stack>
-                <Stack>
-                  <Typography variant="body2" color="#8b96a0">
-                    {overview}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    component={"span"}
-                    color="#8b96a0"
-                  >
-                    <SerieCreditsSubtitle serieId={id} />
-                  </Typography>
-                </Stack>
-                <Link to={`/serie/${id}`} className="search-link">
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="custom"
-                    sx={{ width: "fit-content" }}
-                  >
-                    More Details
-                  </Button>
-                </Link>
-              </Stack>
-            </Stack>
-          );
+          return <SearchCardSerie key={serie.id} serie={serie} />;
         })}
       </div>
     </div>
