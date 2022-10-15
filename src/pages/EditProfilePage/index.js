@@ -16,6 +16,7 @@ import LiveTvIcon from "@mui/icons-material/LiveTv";
 import CommentIcon from "@mui/icons-material/Comment";
 import StarIcon from "@mui/icons-material/Star";
 import FormControl from "@mui/material/FormControl";
+import ProfileSkeleton from "../../components/ProfileSkeleton";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -39,26 +40,39 @@ const inputStyle = {
 const EditProfilePage = (props) => {
   const { userSession } = props;
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [profileInfo, setProfileInfo] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    about: "",
+    avatar: "",
+  });
 
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [about, setAbout] = useState("");
-  const [avatar, setAvatar] = useState("");
+  const { username, firstName, lastName, email, phone, about, avatar } =
+    profileInfo;
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .get(`${API_URL}/user/${userSession._id}`)
       .then((response) => {
-        response.data.username && setUsername(response.data.username);
-        response.data.firstName && setFirstName(response.data.firstName);
-        response.data.lastName && setLastName(response.data.lastName);
-        response.data.email && setEmail(response.data.email);
-        response.data.phone && setPhone(response.data.phone);
-        response.data.about && setAbout(response.data.about);
-        response.data.avatar && setAvatar(response.data.avatar);
+        const { username, firstName, lastName, email, phone, about, avatar } =
+          response.data;
+        setProfileInfo({
+          username,
+          firstName,
+          lastName,
+          email,
+          phone,
+          about,
+          avatar,
+        });
+        setInterval(() => {
+          setIsLoading(false);
+        }, 500);
       })
       .catch((err) => console.log(err));
   }, [userSession]);
@@ -93,7 +107,7 @@ const EditProfilePage = (props) => {
       },
       (error, result) => {
         if (!error && result && result.event === "success") {
-          setAvatar(result.info.url);
+          setProfileInfo({ ...profileInfo, avatar: result.info.url });
         }
       }
     );
@@ -130,221 +144,255 @@ const EditProfilePage = (props) => {
           Cancel
         </Button>
       </Stack>
-      <Paper
-        elevation={3}
-        sx={{
-          backgroundColor: "#4e4f50",
-          borderRadius: "1rem",
-          padding: "2rem",
-          flexGrow: 1,
-          maxWidth: "60rem",
-          margin: "0 auto",
-        }}
-      >
-        <Grid container borderRadius={3}>
-          <Grid item xs="auto" sx={{ margin: "0 auto" }}>
-            <Paper className="profile-img-container" elevation={3}>
-              <img src={avatar ? avatar : profilePic} alt="profile" />
-            </Paper>
-            <Stack>
-              <button
-                id="upload-widget"
-                className="cloudinary-button"
-                onClick={() => handleOpenWidget()}
-                style={{ backgroundColor: "#13c6b2", margin: "2rem auto" }}
+      {isLoading ? (
+        <ProfileSkeleton />
+      ) : (
+        <Paper
+          elevation={3}
+          sx={{
+            backgroundColor: "#4e4f50",
+            borderRadius: "1rem",
+            padding: "2rem",
+            flexGrow: 1,
+            maxWidth: "60rem",
+            margin: "0 auto",
+          }}
+        >
+          <Grid container borderRadius={3}>
+            <Grid item xs="auto" sx={{ margin: "0 auto" }}>
+              <Paper className="profile-img-container" elevation={3}>
+                <img src={avatar ? avatar : profilePic} alt="profile" />
+              </Paper>
+              <Stack>
+                <button
+                  id="upload-widget"
+                  className="cloudinary-button"
+                  onClick={() => handleOpenWidget()}
+                  style={{ backgroundColor: "#13c6b2", margin: "2rem auto" }}
+                >
+                  Change Profile Image
+                </button>
+              </Stack>
+            </Grid>
+            <Grid item xs>
+              <Paper
+                elevation={3}
+                sx={{
+                  backgroundColor: "#242526",
+                  borderRadius: "1rem",
+                  padding: "2rem",
+                  height: "100%",
+                }}
               >
-                Change Profile Image
-              </button>
-            </Stack>
-          </Grid>
-          <Grid item xs>
-            <Paper
-              elevation={3}
-              sx={{
-                backgroundColor: "#242526",
-                borderRadius: "1rem",
-                padding: "2rem",
-                height: "100%",
-              }}
-            >
-              <form className="edit-profile-form" onSubmit={handleFormSubmit}>
-                <Grid container>
-                  <Grid item xs={12}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      className="edit-form"
-                      sx={{ ...inputStyle, width: "90%" }}
-                    >
-                      <InputLabel htmlFor="username" className="edit-input">
-                        Username
-                      </InputLabel>
-                      <Input
-                        id="username"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                      />
-                    </FormControl>
+                <form className="edit-profile-form" onSubmit={handleFormSubmit}>
+                  <Grid container>
+                    <Grid item xs={12}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        className="edit-form"
+                        sx={{ ...inputStyle, width: "90%" }}
+                      >
+                        <InputLabel htmlFor="username" className="edit-input">
+                          Username
+                        </InputLabel>
+                        <Input
+                          id="username"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={username}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              username: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        sx={{ ...inputStyle, width: "80%" }}
+                      >
+                        <InputLabel htmlFor="firstName">First Name</InputLabel>
+                        <Input
+                          id="firstName"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={firstName}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              firstName: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={6}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        sx={{ ...inputStyle, width: "80%" }}
+                      >
+                        <InputLabel htmlFor="lastName">Last Name</InputLabel>
+                        <Input
+                          id="lastName"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={lastName}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              lastName: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        sx={{ ...inputStyle, width: "90%" }}
+                      >
+                        <InputLabel htmlFor="email">Email</InputLabel>
+                        <Input
+                          id="email"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={email}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              email: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        sx={{ ...inputStyle, width: "90%" }}
+                      >
+                        <InputLabel htmlFor="phone">Phone Number</InputLabel>
+                        <Input
+                          id="phone"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={phone}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              phone: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <FormControl
+                        variant="standard"
+                        color="custom"
+                        sx={{ ...inputStyle, width: "90%" }}
+                      >
+                        <InputLabel htmlFor="about">About me</InputLabel>
+                        <Input
+                          id="about"
+                          startAdornment={
+                            <InputAdornment position="start">
+                              <AccountCircle />
+                            </InputAdornment>
+                          }
+                          sx={{ color: "#fff" }}
+                          value={about}
+                          onChange={(e) =>
+                            setProfileInfo({
+                              ...profileInfo,
+                              about: e.target.value,
+                            })
+                          }
+                        />
+                      </FormControl>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={6}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      sx={{ ...inputStyle, width: "80%" }}
-                    >
-                      <InputLabel htmlFor="firstName">First Name</InputLabel>
-                      <Input
-                        id="firstName"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      sx={{ ...inputStyle, width: "80%" }}
-                    >
-                      <InputLabel htmlFor="lastName">Last Name</InputLabel>
-                      <Input
-                        id="lastName"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      sx={{ ...inputStyle, width: "90%" }}
-                    >
-                      <InputLabel htmlFor="email">Email</InputLabel>
-                      <Input
-                        id="email"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      sx={{ ...inputStyle, width: "90%" }}
-                    >
-                      <InputLabel htmlFor="phone">Phone Number</InputLabel>
-                      <Input
-                        id="phone"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <FormControl
-                      variant="standard"
-                      color="custom"
-                      sx={{ ...inputStyle, width: "90%" }}
-                    >
-                      <InputLabel htmlFor="about">About me</InputLabel>
-                      <Input
-                        id="about"
-                        startAdornment={
-                          <InputAdornment position="start">
-                            <AccountCircle />
-                          </InputAdornment>
-                        }
-                        sx={{ color: "#fff" }}
-                        value={about}
-                        onChange={(e) => setAbout(e.target.value)}
-                      />
-                    </FormControl>
-                  </Grid>
-                </Grid>
-              </form>
-            </Paper>
-          </Grid>
-          <Grid item xs={12}>
-            <Paper
-              elevation={3}
-              className="comments-section"
-              sx={{
-                backgroundColor: "#242526",
-                borderRadius: "1rem",
-                padding: "2rem",
-                marginTop: "1rem",
-                flexGrow: 1,
-              }}
-            >
-              <Stack direction="row" alignItems="center" spacing={1}>
-                <LiveTvIcon color="custom" fontSize="large" />
-                <Stack>
-                  <Typography variant="body1" color="#fff" component="div">
-                    {userSession?.list.length} Items
-                  </Typography>
-                  <Typography variant="body1" color="#fff" component="div">
-                    Total Series and Movies Tracked
-                  </Typography>
+                </form>
+              </Paper>
+            </Grid>
+            <Grid item xs={12}>
+              <Paper
+                elevation={3}
+                className="comments-section"
+                sx={{
+                  backgroundColor: "#242526",
+                  borderRadius: "1rem",
+                  padding: "2rem",
+                  marginTop: "1rem",
+                  flexGrow: 1,
+                }}
+              >
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <LiveTvIcon color="custom" fontSize="large" />
+                  <Stack>
+                    <Typography variant="body1" color="#fff" component="div">
+                      {userSession?.list.length} Items
+                    </Typography>
+                    <Typography variant="body1" color="#fff" component="div">
+                      Total Series and Movies Tracked
+                    </Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Stack direction="row" alignItems="center" spacing={1}>
-                <CommentIcon color="error" fontSize="large" />
-                <Stack>
-                  <Typography variant="body1" color="#fff" component="div">
-                    {userSession?.comments.length} Comments
-                  </Typography>
-                  <Typography variant="body1" color="#fff" component="div">
-                    Total Comments made
-                  </Typography>
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <CommentIcon color="error" fontSize="large" />
+                  <Stack>
+                    <Typography variant="body1" color="#fff" component="div">
+                      {userSession?.comments.length} Comments
+                    </Typography>
+                    <Typography variant="body1" color="#fff" component="div">
+                      Total Comments made
+                    </Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
-              <Stack direction="row" alignItems="center" spacing={1}>
-                <StarIcon color="warning" fontSize="large" />
-                <Stack>
-                  <Typography variant="body1" color="#fff" component="div">
-                    {userSession?.ranking.length} Ratings
-                  </Typography>
-                  <Typography variant="body1" color="#fff" component="div">
-                    Total Series and Movies Rated
-                  </Typography>
+                <Stack direction="row" alignItems="center" spacing={1}>
+                  <StarIcon color="warning" fontSize="large" />
+                  <Stack>
+                    <Typography variant="body1" color="#fff" component="div">
+                      {userSession?.ranking.length} Ratings
+                    </Typography>
+                    <Typography variant="body1" color="#fff" component="div">
+                      Total Series and Movies Rated
+                    </Typography>
+                  </Stack>
                 </Stack>
-              </Stack>
-            </Paper>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </Paper>
+        </Paper>
+      )}
     </div>
   );
 };
