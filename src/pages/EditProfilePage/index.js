@@ -38,7 +38,7 @@ const inputStyle = {
 };
 
 const EditProfilePage = (props) => {
-  const { userSession } = props;
+  const { userSession, changeProfileImage } = props;
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [profileInfo, setProfileInfo] = useState({
@@ -95,7 +95,10 @@ const EditProfilePage = (props) => {
     };
     axios
       .put(`${API_URL}/user/edit`, request)
-      .then(navigate("/profile", { replace: true }))
+      .then((res) => {
+        changeProfileImage();
+        navigate("/profile", { replace: true });
+      })
       .catch((err) => console.log(err));
   };
 

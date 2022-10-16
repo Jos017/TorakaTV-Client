@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import axios from "axios";
 import LoadingComponent from "./components/Loading";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer";
 import { getLoggedIn, logout } from "./services/auth";
 import * as USER_HELPERS from "./utils/userToken";
+import profileDefault from "./images/profile-default.png";
 
 // Import pages
 import HomePage from "./pages/HomePage";
@@ -18,10 +20,13 @@ import ProfilePage from "./pages/ProfilePage";
 import EditProfilePage from "./pages/EditProfilePage";
 import ProtectedPage from "./pages/ProtectedPage";
 
+const API_URL = process.env.REACT_APP_SERVER_URL;
+
 export default function App() {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState();
+  const [profileImage, setProfileImage] = useState(profileDefault);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,6 +42,19 @@ export default function App() {
       setIsLoading(false);
     });
   }, []);
+
+  useEffect(() => {
+    user?.avatar && setProfileImage(user?.avatar);
+  }, [user?.avatar]);
+
+  const changeProfileImage = () => {
+    axios
+      .get(`${API_URL}/user/${user._id}`)
+      .then((res) => {
+        setProfileImage(res.data.avatar);
+      })
+      .catch((err) => console.log(err));
+  };
 
   function handleLogout() {
     const accessToken = USER_HELPERS.getUserToken();
@@ -76,6 +94,7 @@ export default function App() {
         searchResults={searchResults}
         search={search}
         user={user}
+        profileImage={profileImage}
       />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -116,7 +135,10 @@ export default function App() {
           path="/profile/edit"
           element={
             <ProtectedPage userSession={user}>
-              <EditProfilePage userSession={user} />
+              <EditProfilePage
+                userSession={user}
+                changeProfileImage={changeProfileImage}
+              />
             </ProtectedPage>
           }
         />

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/logo.png";
-import profileDefault from "../../images/profile-default.png";
 import SearchBar from "../SearchBar";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
@@ -24,6 +23,7 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
+  const profileImage = props.profileImage;
   const anchorRef = React.useRef(null);
 
   const handleToggle = () => {
@@ -84,10 +84,7 @@ const Navbar = (props) => {
                 aria-haspopup="true"
                 onClick={handleToggle}
               >
-                <Avatar
-                  src={props.user.avatar ? props.user.avatar : profileDefault}
-                  alt="avatar"
-                />
+                <Avatar src={profileImage} alt="avatar" />
               </IconButton>
             </Tooltip>
             <Popper
