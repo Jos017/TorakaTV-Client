@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../images/logo.png";
@@ -6,7 +6,6 @@ import SearchBar from "../SearchBar";
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
@@ -74,19 +73,19 @@ const Navbar = (props) => {
         {/** Menu shown when a user is loged in */}
         {props.user ? (
           <Stack direction="row" spacing={2} alignItems="center">
-            <Tooltip title="Account settings">
-              <IconButton
-                ref={anchorRef}
-                size="small"
-                sx={{ ml: 2 }}
-                aria-controls={open ? "composition-menu" : undefined}
-                aria-expanded={open ? "true" : undefined}
-                aria-haspopup="true"
-                onClick={handleToggle}
-              >
-                <Avatar src={profileImage} alt="avatar" />
-              </IconButton>
-            </Tooltip>
+            <IconButton
+              ref={anchorRef}
+              size="small"
+              sx={{ ml: 2 }}
+              aria-controls={open ? "composition-menu" : undefined}
+              aria-expanded={open ? "true" : undefined}
+              aria-haspopup="true"
+              onClick={handleToggle}
+              className="avatar-btn"
+              style={{ padding: 3 }}
+            >
+              <Avatar src={profileImage} alt="avatar" />
+            </IconButton>
             <Popper
               open={open}
               anchorEl={anchorRef.current}

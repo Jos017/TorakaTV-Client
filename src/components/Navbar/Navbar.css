@@ -67,3 +67,7 @@ nav {
   transform: scale(1.05);
   background-color: #d13e3e;
 }
+
+.avatar-btn:hover {
+  background: #13c6b2 !important;
+}
