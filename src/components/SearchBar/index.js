@@ -70,7 +70,7 @@ const SearchBar = (props) => {
         value={inputValue}
         onChange={handleInputChange}
         onKeyUp={handleKeyUp}
-        placeholder="Search…"
+        placeholder="Search Movie or Show…"
         inputProps={{ "aria-label": "search" }}
       />
     </Search>
