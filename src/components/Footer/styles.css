@@ -16,3 +16,10 @@ footer .link {
 footer .link:hover {
   color: #444;
 }
+
+footer .footer-divider {
+  width: 95%;
+  border: 0;
+  border-top: 3px solid #fff;
+  border-radius: 5px;
+}
