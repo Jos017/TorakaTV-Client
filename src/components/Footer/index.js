@@ -35,7 +35,7 @@ const Footer = props => {
           </Link>
         </Grid>
         {props.user ? (
-          <Grid item xs={6} sm={2} textAlign="center">
+          <Grid item xs={12} sm={2} textAlign="center">
             <Button
               variant="contained"
               color="error"
