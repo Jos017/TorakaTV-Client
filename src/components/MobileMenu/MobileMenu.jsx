@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Popper from '@mui/material/Popper';
 import Grow from '@mui/material/Grow';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const MobileMenu = () => {
   const [open, setOpen] = useState(false);
