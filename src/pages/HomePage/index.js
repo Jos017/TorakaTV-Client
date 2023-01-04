@@ -18,7 +18,7 @@ function HomePage() {
           sx={{
             width: { xs: '90%', md: '50rem' },
             margin: '1rem 0',
-            fontSize: { xs: '2rem', md: '5rem' },
+            fontSize: { xs: '2rem', sm: '3rem', md: '5rem' },
           }}
         >
           Never forget your watching list again
@@ -26,7 +26,7 @@ function HomePage() {
         <Typograpy variant="subtitle" width={'90%'}>
           Save an schedule your movies and TV series with us
         </Typograpy>
-        <Stack spacing={2} direction="row" margin={2}>
+        <Stack spacing={2} direction={{ xs: 'column', sm: 'row' }} margin={2}>
           <a href="#track-section" className="link">
             <Button variant="outlined" color="custom">
               Learn more
@@ -42,7 +42,7 @@ function HomePage() {
       <section className="track-section" id="track-section">
         <Box width="100%">
           <Grid container maxWidth="1280px" margin="0 auto">
-            <Grid item xs={12} md={4} spacing={2}>
+            <Grid item xs={12} md={4}>
               <div className="track-image" style={{ margin: '1rem auto' }}>
                 <img src={trackImg} alt="Tracking movies"></img>
               </div>
@@ -62,7 +62,7 @@ function HomePage() {
                   sx={{
                     width: '90%',
                     margin: '1rem 0',
-                    fontSize: { xs: '2rem', md: '5rem' },
+                    fontSize: { xs: '2rem', sm: '3rem', md: '5rem' },
                   }}
                 >
                   Track your movies and series
