@@ -113,6 +113,7 @@ const Navbar = props => {
                 >
                   <Avatar src={profileImage} alt="avatar" />
                 </IconButton>
+                <h3 onClick={handleToggle}>{props.user.username}</h3>
                 <Popper
                   open={open}
                   anchorEl={anchorRef.current}
@@ -139,7 +140,7 @@ const Navbar = props => {
                             onKeyDown={handleListKeyDown}
                           >
                             <MenuItem
-                              onClick={e => {
+                              onClick={(e) => {
                                 handleClose(e);
                                 navigate('/profile');
                               }}
@@ -150,7 +151,7 @@ const Navbar = props => {
                               Profile
                             </MenuItem>
                             <MenuItem
-                              onClick={e => {
+                              onClick={(e) => {
                                 handleClose(e);
                                 navigate('/myList');
                               }}
@@ -162,7 +163,7 @@ const Navbar = props => {
                             </MenuItem>
                             <Divider />
                             <MenuItem
-                              onClick={e => {
+                              onClick={(e) => {
                                 handleClose(e);
                                 navigate('/profile/edit');
                               }}
@@ -173,7 +174,7 @@ const Navbar = props => {
                               Edit Profile
                             </MenuItem>
                             <MenuItem
-                              onClick={e => {
+                              onClick={(e) => {
                                 handleClose(e);
                                 props.handleLogout(e);
                               }}

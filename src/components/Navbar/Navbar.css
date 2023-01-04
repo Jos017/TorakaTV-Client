@@ -69,3 +69,13 @@ nav {
 .avatar-btn:hover {
   background: #13c6b2 !important;
 }
+
+.nav__authLinks h3 {
+  color:#13c6b2;
+}
+
+@media (max-width: 600px) {
+  .nav__authLinks h3 {
+    display: none;
+  }
+}
