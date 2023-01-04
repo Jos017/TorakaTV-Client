@@ -124,28 +124,38 @@ const EditProfilePage = (props) => {
         direction="row"
         alignItems="center"
         spacing={3}
-        marginTop={{ xs: 12, sm: 1 }}
+        marginTop={{ xs: 10, sm: 1 }}
         marginBottom={3}
       >
-        <Typography variant="h2" color="#fff" fontWeight="Bold">
-          My Profile
+        <Typography
+          variant="h2"
+          color="#fff"
+          fontWeight="Bold"
+          fontSize={{ xs: '2rem', md: '3rem' }}
+        >
+          Edit Profile
         </Typography>
-        <Button
-          variant="contained"
-          color="custom"
-          size="small"
-          onClick={handleFormSubmit}
+        <Stack
+          direction={{ xs: 'column', sm: 'row' }}
+          spacing={{ xs: 1, sm: 3 }}
         >
-          Save
-        </Button>
-        <Button
-          variant="contained"
-          color="error"
-          size="small"
-          onClick={handleCancel}
-        >
-          Cancel
-        </Button>
+          <Button
+            variant="contained"
+            color="custom"
+            size="small"
+            onClick={handleFormSubmit}
+          >
+            Save
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            size="small"
+            onClick={handleCancel}
+          >
+            Cancel
+          </Button>
+        </Stack>
       </Stack>
       {isLoading ? (
         <ProfileSkeleton />
@@ -153,25 +163,43 @@ const EditProfilePage = (props) => {
         <Paper
           elevation={3}
           sx={{
-            backgroundColor: "#4e4f50",
-            borderRadius: "1rem",
-            padding: "2rem",
+            backgroundColor: '#4e4f50',
+            borderRadius: '1rem',
+            padding: { xs: '1.6rem', sm: '2rem' },
             flexGrow: 1,
-            maxWidth: "60rem",
-            margin: "0 auto",
+            maxWidth: '60rem',
+            margin: '0 auto',
           }}
         >
-          <Grid container borderRadius={3}>
-            <Grid item xs="auto" sx={{ margin: "0 auto" }}>
-              <Paper className="profile-img-container" elevation={3}>
-                <img src={avatar ? avatar : profilePic} alt="profile" />
+          <Grid container borderRadius={3} spacing={1}>
+            <Grid
+              item
+              xs={12}
+              sm="auto"
+              sx={{ margin: '0 auto' }}
+              justifyContent="center"
+            >
+              <Paper
+                elevation={3}
+                sx={{
+                  borderRadius: { xs: '50%', sm: '1rem', md: '1rem' },
+                  width: { xs: '155px', sm: '200px', md: '300px' },
+                  height: { xs: '155px', sm: '200px', md: '300px' },
+                  overflow: 'hidden',
+                  margin: '0 auto',
+                }}
+              >
+                <img
+                  className="edit-profile-img"
+                  src={avatar ? avatar : profilePic}
+                  alt="profile"
+                />
               </Paper>
               <Stack>
                 <button
                   id="upload-widget"
                   className="cloudinary-button"
                   onClick={() => handleOpenWidget()}
-                  style={{ backgroundColor: "#13c6b2", margin: "2rem auto" }}
                 >
                   Change Profile Image
                 </button>
@@ -181,10 +209,10 @@ const EditProfilePage = (props) => {
               <Paper
                 elevation={3}
                 sx={{
-                  backgroundColor: "#242526",
-                  borderRadius: "1rem",
-                  padding: "2rem",
-                  height: "100%",
+                  backgroundColor: '#242526',
+                  borderRadius: '1rem',
+                  padding: { xs: '1.6rem', sm: '2rem' },
+                  height: '100%',
                 }}
               >
                 <form className="edit-profile-form" onSubmit={handleFormSubmit}>
@@ -194,7 +222,7 @@ const EditProfilePage = (props) => {
                         variant="standard"
                         color="custom"
                         className="edit-form"
-                        sx={{ ...inputStyle, width: "90%" }}
+                        sx={{ ...inputStyle, width: '90%' }}
                       >
                         <InputLabel htmlFor="username" className="edit-input">
                           Username
@@ -206,7 +234,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={username}
                           onChange={(e) =>
                             setProfileInfo({
@@ -217,11 +245,11 @@ const EditProfilePage = (props) => {
                         />
                       </FormControl>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                       <FormControl
                         variant="standard"
                         color="custom"
-                        sx={{ ...inputStyle, width: "80%" }}
+                        sx={{ ...inputStyle, width: { xs: '90%', sm: '80%' } }}
                       >
                         <InputLabel htmlFor="firstName">First Name</InputLabel>
                         <Input
@@ -231,7 +259,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={firstName}
                           onChange={(e) =>
                             setProfileInfo({
@@ -242,11 +270,11 @@ const EditProfilePage = (props) => {
                         />
                       </FormControl>
                     </Grid>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                       <FormControl
                         variant="standard"
                         color="custom"
-                        sx={{ ...inputStyle, width: "80%" }}
+                        sx={{ ...inputStyle, width: { xs: '90%', sm: '80%' } }}
                       >
                         <InputLabel htmlFor="lastName">Last Name</InputLabel>
                         <Input
@@ -256,7 +284,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={lastName}
                           onChange={(e) =>
                             setProfileInfo({
@@ -271,7 +299,7 @@ const EditProfilePage = (props) => {
                       <FormControl
                         variant="standard"
                         color="custom"
-                        sx={{ ...inputStyle, width: "90%" }}
+                        sx={{ ...inputStyle, width: '90%' }}
                       >
                         <InputLabel htmlFor="email">Email</InputLabel>
                         <Input
@@ -281,7 +309,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={email}
                           onChange={(e) =>
                             setProfileInfo({
@@ -296,7 +324,7 @@ const EditProfilePage = (props) => {
                       <FormControl
                         variant="standard"
                         color="custom"
-                        sx={{ ...inputStyle, width: "90%" }}
+                        sx={{ ...inputStyle, width: '90%' }}
                       >
                         <InputLabel htmlFor="phone">Phone Number</InputLabel>
                         <Input
@@ -306,7 +334,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={phone}
                           onChange={(e) =>
                             setProfileInfo({
@@ -321,7 +349,7 @@ const EditProfilePage = (props) => {
                       <FormControl
                         variant="standard"
                         color="custom"
-                        sx={{ ...inputStyle, width: "90%" }}
+                        sx={{ ...inputStyle, width: '90%' }}
                       >
                         <InputLabel htmlFor="about">About me</InputLabel>
                         <Input
@@ -331,7 +359,7 @@ const EditProfilePage = (props) => {
                               <AccountCircle />
                             </InputAdornment>
                           }
-                          sx={{ color: "#fff" }}
+                          sx={{ color: '#fff' }}
                           value={about}
                           onChange={(e) =>
                             setProfileInfo({
@@ -351,43 +379,90 @@ const EditProfilePage = (props) => {
                 elevation={3}
                 className="comments-section"
                 sx={{
-                  backgroundColor: "#242526",
-                  borderRadius: "1rem",
-                  padding: "2rem",
-                  marginTop: "1rem",
+                  backgroundColor: '#242526',
+                  borderRadius: '1rem',
+                  padding: '2rem',
+                  marginTop: '1rem',
                   flexGrow: 1,
                 }}
               >
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  <LiveTvIcon color="custom" fontSize="large" />
-                  <Stack>
-                    <Typography variant="body1" color="#fff" component="div">
-                      {userSession?.list.length} Items
+                <Stack
+                  width={1}
+                  direction="row"
+                  justifyContent="space-evenly"
+                  alignItems="center"
+                  spacing={1}
+                >
+                  <Stack
+                    alignItems="center"
+                    width={{ xs: '50px', sm: '100px', md: '150px' }}
+                  >
+                    <LiveTvIcon color="custom" fontSize="large" />
+                    <Typography
+                      variant="body1"
+                      color="#fff"
+                      component="div"
+                      textAlign="center"
+                      display={{ xs: 'none', sm: 'inline' }}
+                    >
+                      Series and Movies
                     </Typography>
-                    <Typography variant="body1" color="#fff" component="div">
-                      Total Series and Movies Tracked
+                    <Typography
+                      variant="body1"
+                      color="#13c6b2"
+                      component="div"
+                      textAlign="center"
+                      fontSize="1.6rem"
+                    >
+                      {userSession?.list.length}
                     </Typography>
                   </Stack>
-                </Stack>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  <CommentIcon color="error" fontSize="large" />
-                  <Stack>
-                    <Typography variant="body1" color="#fff" component="div">
-                      {userSession?.comments.length} Comments
+                  <Stack
+                    alignItems="center"
+                    width={{ xs: '50px', sm: '100px', md: '150px' }}
+                  >
+                    <CommentIcon color="error" fontSize="large" />
+                    <Typography
+                      variant="body1"
+                      color="#fff"
+                      component="div"
+                      textAlign="center"
+                      display={{ xs: 'none', sm: 'inline' }}
+                    >
+                      Comments
                     </Typography>
-                    <Typography variant="body1" color="#fff" component="div">
-                      Total Comments made
+                    <Typography
+                      variant="body1"
+                      color="#D32F2F"
+                      component="div"
+                      textAlign="center"
+                      fontSize="1.6rem"
+                    >
+                      {userSession?.comments.length}
                     </Typography>
                   </Stack>
-                </Stack>
-                <Stack direction="row" alignItems="center" spacing={1}>
-                  <StarIcon color="warning" fontSize="large" />
-                  <Stack>
-                    <Typography variant="body1" color="#fff" component="div">
-                      {userSession?.ranking.length} Ratings
+                  <Stack
+                    alignItems="center"
+                    width={{ xs: '50px', sm: '100px', md: '150px' }}
+                  >
+                    <StarIcon color="warning" fontSize="large" />
+                    <Typography
+                      variant="body1"
+                      color="#fff"
+                      component="div"
+                      textAlign="center"
+                      display={{ xs: 'none', sm: 'inline' }}
+                    >
+                      Ratings
                     </Typography>
-                    <Typography variant="body1" color="#fff" component="div">
-                      Total Series and Movies Rated
+                    <Typography
+                      variant="body1"
+                      color="#ED6C02"
+                      component="div"
+                      textAlign="center"
+                      fontSize="1.6rem"
+                    >
+                      {userSession?.ranking.length}
                     </Typography>
                   </Stack>
                 </Stack>
