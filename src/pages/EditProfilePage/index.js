@@ -62,13 +62,13 @@ const EditProfilePage = (props) => {
         const { username, firstName, lastName, email, phone, about, avatar } =
           response.data;
         setProfileInfo({
-          username,
-          firstName,
-          lastName,
-          email,
-          phone,
-          about,
-          avatar,
+          username: username ?? "",
+          firstName: firstName ?? "",
+          lastName: lastName ?? "",
+          email: email ?? "",
+          phone: phone ?? "",
+          about: about ?? "",
+          avatar: avatar ?? "",
         });
         setInterval(() => {
           setIsLoading(false);
@@ -235,7 +235,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={username}
+                          value={profileInfo.username}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
@@ -260,7 +260,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={firstName}
+                          value={profileInfo.firstName}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
@@ -285,7 +285,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={lastName}
+                          value={profileInfo.lastName}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
@@ -310,7 +310,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={email}
+                          value={profileInfo.email}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
@@ -335,7 +335,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={phone}
+                          value={profileInfo.phone}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
@@ -360,7 +360,7 @@ const EditProfilePage = (props) => {
                             </InputAdornment>
                           }
                           sx={{ color: '#fff' }}
-                          value={about}
+                          value={profileInfo.about}
                           onChange={(e) =>
                             setProfileInfo({
                               ...profileInfo,
