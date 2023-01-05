@@ -8,6 +8,7 @@ import Rating from "@mui/material/Rating";
 import MovieCreditsSubtitle from "../MovieCreditsSubtitle";
 import GenresChip from "../GenresChip";
 import Grid from "@mui/material/Grid";
+import notAvalable from '../../images/notAvailable.jpg';
 
 const SearchCardMovie = (props) => {
   const { id, title, overview, poster_path, vote_average, genre_ids } =
@@ -26,7 +27,11 @@ const SearchCardMovie = (props) => {
           className="card-img"
           component="img"
           alt={title}
-          image={`http://image.tmdb.org/t/p/w500${poster_path}`}
+          image={
+            poster_path
+              ? `http://image.tmdb.org/t/p/w500${poster_path}`
+              : notAvalable
+          }
           sx={{ height: '100%' }}
         />
       </Grid>

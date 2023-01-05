@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import SerieCreditsSubtitle from "../SerieCreditsSubtitle";
 import GenresSeriesChip from "../GenresSeriesChip";
 import Grid from "@mui/material/Grid";
+import notAvailable from "../../images/notAvailable.jpg"
 
 const SearchCardSerie = (props) => {
   const { id, name, overview, poster_path, vote_average, genre_ids } =
@@ -26,7 +27,11 @@ const SearchCardSerie = (props) => {
           className="card-img"
           component="img"
           alt={name}
-          image={`http://image.tmdb.org/t/p/w500${poster_path}`}
+          image={
+            poster_path
+              ? `http://image.tmdb.org/t/p/w500${poster_path}`
+              : notAvailable
+          }
           sx={{ height: '100%' }}
         />
       </Grid>
@@ -109,11 +114,7 @@ const SearchCardSerie = (props) => {
         >
           <SerieCreditsSubtitle serieId={id} />
         </Typography>
-        <Stack
-          alignItems="flex-end"
-          paddingRight="1rem"
-          marginTop="1rem"
-        >
+        <Stack alignItems="flex-end" paddingRight="1rem" marginTop="1rem">
           <Link to={`/serie/${id}`} className="search-link">
             <Button
               size="small"
