@@ -79,7 +79,6 @@ const SearchCardMovie = (props) => {
           direction="row"
           justifyContent="end"
           sx={{ display: { xs: 'none', sm: 'flex' } }}
-          color="red"
         >
           <Link to={`/movie/${id}`} className="search-link">
             <Button
@@ -102,16 +101,14 @@ const SearchCardMovie = (props) => {
           width: '100%',
         }}
       >
-        <Stack>
-          <Typography
-            variant="body2"
-            component={'span'}
-            color="#8b96a0"
-            sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' } }}
-          >
-            <MovieCreditsSubtitle movieId={id} />
-          </Typography>
-        </Stack>
+        <Typography
+          variant="body2"
+          component={'span'}
+          color="#8b96a0"
+          sx={{ fontSize: { xs: '0.7rem', sm: '0.8rem' } }}
+        >
+          <MovieCreditsSubtitle movieId={id} />
+        </Typography>
         <Stack alignItems="flex-end" paddingRight="1rem" marginTop="1rem">
           <Link to={`/movie/${id}`} className="search-link">
             <Button
