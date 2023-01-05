@@ -54,10 +54,15 @@ const Search = (props) => {
         direction="row"
         alignItems="center"
         spacing={3}
-        marginTop={{ xs: 12, sm: 1 }}
+        marginTop={{ xs: 10, sm: 1 }}
         marginBottom={3}
       >
-        <Typography variant="h2" color="#fff" fontWeight="bold">
+        <Typography
+          variant="h2"
+          color="#fff"
+          fontWeight="bold"
+          fontSize={{ xs: '2rem', md: '3rem' }}
+        >
           Your Search Result
         </Typography>
       </Stack>
@@ -68,10 +73,11 @@ const Search = (props) => {
         mb={2}
         textAlign="center"
         fontWeight="bold"
+        fontSize={{ xs: '1.6rem', md: '2rem' }}
       >
         Movies
       </Typography>
-      <div className="card-container" style={{ marginBottom: "2rem" }}>
+      <div className="card-container" style={{ marginBottom: '2rem' }}>
         {isLoadingMovies ? (
           <>
             <SearchSkeleton />
@@ -92,6 +98,7 @@ const Search = (props) => {
         mb={2}
         textAlign="center"
         fontWeight="bold"
+        fontSize={{ xs: '1.6rem', md: '2rem' }}
       >
         Series
       </Typography>

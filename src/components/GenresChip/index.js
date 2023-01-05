@@ -34,7 +34,7 @@ const GenresChip = (props) => {
             key={movieGenre.id}
             color="custom"
             size="small"
-            sx={{ mr: 1 }}
+            sx={{ mr: 1, fontSize: {xs: '0.7rem', sm: '0.8rem'}}}
           />
         );
       })}
