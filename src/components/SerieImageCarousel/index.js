@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
 
 const SerieImageCarousel = (props) => {
   const { serieId } = props;
@@ -19,18 +20,22 @@ const SerieImageCarousel = (props) => {
       });
   }, [serieId]);
   return (
-    <div>
+    <Box display="flex" justifyContent="center" flexWrap="wrap" gap={1}>
       {images?.map((image) => {
         return (
-          <img
-            src={`http://image.tmdb.org/t/p/w500${image.file_path}`}
-            width="250px"
-            alt={image.file_path}
+          <a
+            href={`http://image.tmdb.org/t/p/w500${image.file_path}`}
             key={image.file_path}
-          />
+          >
+            <img
+              src={`http://image.tmdb.org/t/p/w500${image.file_path}`}
+              width="250px"
+              alt={image.file_path}
+            />
+          </a>
         );
       })}
-    </div>
+    </Box>
   );
 };
 
