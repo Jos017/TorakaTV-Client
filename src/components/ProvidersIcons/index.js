@@ -33,10 +33,18 @@ const ProvidersIcons = (props) => {
 
   return (
     <>
-      <Stack direction="row" margin={2}>
-        <Typography variant="h6" color="#FFF" marginRight="1rem">
-          For buying:
-        </Typography>
+      <Stack direction="row" mx={2} mb={2}>
+        {providers?.buy && (
+          <Typography
+            variant="h6"
+            color="#FFF"
+            marginRight="1rem"
+            display="flex"
+            alignItems="center"
+          >
+            For buying:
+          </Typography>
+        )}
         {providers?.buy?.map((provider) => {
           return (
             <Link
@@ -56,9 +64,17 @@ const ProvidersIcons = (props) => {
         })}
       </Stack>
       <Stack direction="row" margin={2}>
-        <Typography variant="h6" color="#FFF" marginRight="1rem">
-          Subscription:
-        </Typography>
+        {providers?.subs && (
+          <Typography
+            variant="h6"
+            color="#FFF"
+            marginRight="1rem"
+            display="flex"
+            alignItems="center"
+          >
+            Subscription:
+          </Typography>
+        )}
         {providers?.subs?.map((provider) => {
           return (
             <Link
