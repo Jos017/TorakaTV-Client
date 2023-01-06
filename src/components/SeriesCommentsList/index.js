@@ -76,65 +76,73 @@ const SeriesCommentsList = (props) => {
           userSession={userSession}
         />
       )}
-      {comments?.map((comment) => {
-        const { user, createdAt, description, _id, updatedAt } = comment;
-        return (
-          <Grid
-            container
-            alignItems="Center"
-            style={{ color: "fff" }}
-            key={_id}
-            padding={5}
-            margin={1}
-            maxWidth="900px"
-            sx={{ backgroundColor: "#242526" }}
-          >
-            <Grid item xs="auto">
-              <Avatar src={defaultProfile}></Avatar>
-            </Grid>
-            <Grid item xs>
-              <Typography variant="body1" color="#fff">
-                {user?.username}
-              </Typography>
-              <Typography variant="body1" color="#fff">
-                {updatedAt
-                  ? moment(updatedAt).format("DD - MMM - YYYY (HH:mm)")
-                  : moment(createdAt).format("DD - MMM - YYYY (HH:mm)")}
-              </Typography>
-            </Grid>
-            <Grid item xs="auto">
-              {userSession?._id === user?._id && (
-                <MenuDial
-                  editComment={editComment}
-                  deleteComment={deleteComment}
-                  commentId={_id}
-                  description={description}
-                />
-              )}
-            </Grid>
-            <Grid item xs={12}>
-              <Typography
-                variant="body1"
-                color="#fff"
-                mt={1}
-                pt={1}
-                borderTop="1px solid #3a3b3c"
+      <Grid container sx={12} mt="0.5rem" spacing={2}>
+        {comments?.map((comment) => {
+          const { user, createdAt, description, _id, updatedAt } = comment;
+          return (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              alignItems="center"
+              key={_id}
+            >
+              <Grid
+                container
+                borderRadius='1rem'
+                sx={{ backgroundColor: '#242526', color: '#fff' }}
+                padding={4}
+                alignItems="center"
               >
-                {description}
-              </Typography>
+                <Grid item xs="auto" mr="1rem">
+                  <Avatar src={defaultProfile}></Avatar>
+                </Grid>
+                <Grid item xs>
+                  <Typography variant="body1" color="#fff" fontSize={{ xs: '0.8rem', sm: '0.9rem' }}>
+                    @{user?.username}
+                  </Typography>
+                  <Typography variant="body1" color="#8b96a0" fontSize={{ xs: '0.8rem', sm: '0.9rem' }}>
+                    {updatedAt
+                      ? moment(updatedAt).format('DD/MMM/YYYY')
+                      : moment(createdAt).format('DD/MMM/YYYY')}
+                  </Typography>
+                </Grid>
+                <Grid item xs="auto">
+                  {userSession?._id === user?._id && (
+                    <MenuDial
+                      editComment={editComment}
+                      deleteComment={deleteComment}
+                      commentId={_id}
+                      description={description}
+                    />
+                  )}
+                </Grid>
+                <Grid item xs={12}>
+                  <Typography
+                    variant="body1"
+                    color="#8b96a0"
+                    mt={1}
+                    pt={1}
+                    borderTop="1px solid #8b96a0"
+                    fontSize={{ xs: '0.8rem', sm: '0.9rem' }}
+                  >
+                    {description}
+                  </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <IconButton
+                    aria-label="delete"
+                    size="small"
+                    sx={{ '&:hover': { backgroundColor: '#4e4f50' } }}
+                  >
+                    <ThumbUpOutlinedIcon fontSize="small" color="custom" />
+                  </IconButton>
+                </Grid>
+              </Grid>
             </Grid>
-            <Grid item xs={12}>
-              <IconButton
-                aria-label="delete"
-                size="small"
-                sx={{ "&:hover": { backgroundColor: "#4e4f50" } }}
-              >
-                <ThumbUpOutlinedIcon fontSize="small" color="custom" />
-              </IconButton>
-            </Grid>
-          </Grid>
-        );
-      })}
+          );
+        })}
+      </Grid>
     </div>
   );
 };
