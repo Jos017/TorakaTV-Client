@@ -126,7 +126,7 @@ const SerieDetailsPage = (props) => {
 
   const { name, genres, vote_average, poster_path, overview } = serieDetails;
   return (
-    <section className="movie-details">
+    <section className="serie-details">
       <Grid container spacing={2}>
         <Grid item xs={8} marginTop={{ xs: 12, sm: 1 }}>
           <Typography variant="h2" color="#fff" fontWeight="Bold">
