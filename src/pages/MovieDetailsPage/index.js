@@ -8,13 +8,13 @@ import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 import Chip from "@mui/material/Chip";
 import Button from "@mui/material/Button";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import YouTubeFrame from "../../components/YouTubeFrame";
 import MovieCreditsSubtitle from "../../components/MovieCreditsSubtitle";
 import ProvidersIcons from "../../components/ProvidersIcons";
 import ImageCarousel from "../../components/ImageCarousel";
 import CommentsList from "../../components/CommentsList";
+import SectionTitle from "../../components/SectionTitle";
 
 const API_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -125,77 +125,185 @@ const MovieDetailsPage = (props) => {
   };
 
   const { title, genres, vote_average, poster_path, overview } = movieDetails;
+  
+  const ratingStyles = {
+    '& .MuiRating-iconEmpty': {
+      color: '#8b96a0',
+    },
+    fontSize: {xs: '1.3rem', sm: '1.5rem'}
+  }
+
   return (
     <section className="movie-details">
-      <Grid container spacing={2}>
-        <Grid item xs={8} marginTop={{ xs: 12, sm: 1 }}>
-          <Typography variant="h2" color="#fff" fontWeight="Bold">
+      <Grid
+        container
+        rowSpacing={2}
+        columnSpacing={{ xs: 0, md: 2 }}
+        maxWidth="1440px"
+      >
+        <Grid item xs={12} marginTop={{ xs: 8, sm: 1 }}>
+          <Typography
+            variant="h2"
+            color="#fff"
+            fontWeight="Bold"
+            fontSize={{ xs: '2rem', md: '3rem' }}
+          >
             {title}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6" color="#fff">
-            GLOBAL RATING
-          </Typography>
-          <Rating
-            name="globlal-rating"
-            value={vote_average / 2}
-            precision={0.5}
-            readOnly
-          />
-          <Typography variant="subtitle1" color="#fff">
-            {vote_average?.toFixed(2)} / 10
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="h6" color="#fff">
-            YOUR RATING
-          </Typography>
-          <Rating
-            name="your-rating"
-            value={ranking.rank ? ranking.rank / 2 : 0}
-            precision={0.5}
-            onChange={(event, newRanking) => addRating(newRanking * 2)}
-          />
-          <Typography variant="subtitle1" color="#fff">
-            {ranking.rank ? ranking.rank : 0} / 10
-          </Typography>
-        </Grid>
-        <Grid item xs={12}>
-          {genres?.map((genre) => {
-            return (
-              <Chip
-                label={genre.name}
-                key={genre.id}
-                color="custom"
-                size="small"
-                sx={{ mr: 1 }}
-              />
-            );
-          })}
-        </Grid>
-        <Grid item xs={4}>
-          <img
-            width="100%"
-            src={poster_path && `http://image.tmdb.org/t/p/w500${poster_path}`}
-            alt={title}
-          />
-        </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={12} md={6} height={{ xs: '200px', sm: '350px' }}>
           <YouTubeFrame videoKey={trailer[0]?.key} />
         </Grid>
-        <Grid item xs={8}>
-          <Typography variant="h4" color="#fff">
+        <Grid container item xs={12} md={6}>
+          <Grid
+            item
+            xs={12}
+            display="flex"
+            flexDirection="column"
+            justifyContent="center"
+            pl={{ md: '2rem' }}
+          >
+            <Typography
+              variant="h6"
+              color="#fff"
+              fontSize={{ xs: '0.8rem', md: '1.2rem' }}
+            >
+              GENRES
+            </Typography>
+            <Box>
+              {genres?.map((genre) => {
+                return (
+                  <Chip
+                    label={genre.name}
+                    key={genre.id}
+                    color="custom"
+                    size="small"
+                    sx={{ mr: 1 }}
+                  />
+                );
+              })}
+            </Box>
+          </Grid>
+          <Grid
+            container
+            item
+            xs={12}
+            backgroundColor="#2C2C2C"
+            borderRadius="8px"
+            mt={{ xs: '1rem', md: 0 }}
+            padding="1rem"
+          >
+            <Grid
+              item
+              xs={6}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography
+                variant="h6"
+                color="#fff"
+                fontSize={{ xs: '0.8rem', md: '1.2rem' }}
+              >
+                GLOBAL RATING
+              </Typography>
+              <Rating
+                name="globlal-rating"
+                value={vote_average / 2}
+                precision={0.5}
+                readOnly
+                sx={ratingStyles}
+              />
+              <Typography variant="subtitle1" color="#fff">
+                <span style={{ color: '#13c6b2' }}>
+                  {vote_average?.toFixed(2)}
+                </span>{' '}
+                / 10
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              xs={6}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              justifyContent="center"
+            >
+              <Typography
+                variant="h6"
+                color="#fff"
+                fontSize={{ xs: '0.8rem', md: '1.2rem' }}
+              >
+                YOUR RATING
+              </Typography>
+              <Rating
+                name="your-rating"
+                value={ranking.rank ? ranking.rank / 2 : 0}
+                precision={0.5}
+                onChange={(event, newRanking) => addRating(newRanking * 2)}
+                sx={ratingStyles}
+              />
+              <Typography variant="subtitle1" color="#fff">
+                <span style={{ color: '#13c6b2' }}>
+                  {ranking.rank ? ranking.rank : 0}
+                </span>{' '}
+                / 10
+              </Typography>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid container item xs={12}>
+          <SectionTitle>MOVIE INFO</SectionTitle>
+        </Grid>
+        <Grid item xs={12} sm={2} xl="auto" pr={'1rem'} maxHeight>
+          <Box sx={{ maxWidth: '100%', height: '100%' }}>
+            <img
+              width="100%"
+              height="100%"
+              src={
+                poster_path
+                  ? `http://image.tmdb.org/t/p/w500${poster_path}`
+                  : '../../images/notAvailable.jpg'
+              }
+              alt={title}
+              style={{ objectFit: 'contain', maxHeight: '250px' }}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs alignSelf="center">
+          <Typography variant="h5" color="#fff">
             Synopsis
           </Typography>
-          <Typography variant="body1" color="#fff">
+          <Typography
+            variant="body1"
+            color="#8b96a0"
+            fontSize={{ xs: '0.8rem', sm: '0.9rem' }}
+          >
             {overview}
           </Typography>
-          <Typography variant="body2" component={"span"} color="#8b96a0">
+          <Typography
+            variant="body2"
+            component={'span'}
+            color="#8b96a0"
+            display={{ xs: 'none', md: 'grid' }}
+          >
             <MovieCreditsSubtitle movieId={movieId} />
           </Typography>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} display={{ xs: 'grid', md: 'none' }}>
+          <Typography variant="body2" component={'span'} color="#8b96a0">
+            <MovieCreditsSubtitle movieId={movieId} />
+          </Typography>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          md="auto"
+          display="flex"
+          alignItems="center"
+          justifyContent={{ xs: 'center', sm: 'flex-end' }}
+        >
           {user && (
             <Button
               variant="outlined"
@@ -206,110 +314,20 @@ const MovieDetailsPage = (props) => {
             </Button>
           )}
         </Grid>
-        <Grid item xs={1}>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs="auto">
-          <Typography variant="h5" color="#fff">
-            WHERE TO WATCH
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
+        <Grid container item xs={12}>
+          <SectionTitle>WHERE TO WATCH</SectionTitle>
         </Grid>
         <Grid item xs={12}>
           <ProvidersIcons movieId={movieId} />
         </Grid>
-        <Grid item xs={1}>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs="auto">
-          <Typography variant="h5" color="#fff">
-            {title?.toUpperCase()} PHOTOS
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
+        <Grid container item xs={12}>
+          <SectionTitle>{title?.toUpperCase()} PHOTOS</SectionTitle>
         </Grid>
         <Grid item xs={12}>
           <ImageCarousel movieId={movieId} />
         </Grid>
-        <Grid item xs={1}>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
-        </Grid>
-        <Grid item xs="auto">
-          <Typography variant="h5" color="#fff">
-            COMMENTS
-          </Typography>
-        </Grid>
-        <Grid item xs>
-          <Box
-            sx={{
-              pt: "0.5rem",
-              display: "grid",
-              gridTemplateColumns: "1fr",
-            }}
-          >
-            <Paper
-              elevation={3}
-              sx={{ backgroundColor: "#13c6b2", height: "1rem" }}
-            />
-          </Box>
+        <Grid container item xs={12}>
+          <SectionTitle>COMMENTS</SectionTitle>
         </Grid>
         <Grid item xs={12}>
           <CommentsList movieId={movieId} color="#fff" userSession={user} />
