@@ -76,7 +76,7 @@ const CommentsList = (props) => {
           userSession={userSession}
         />
       )}
-      <Grid container sx={12} mt="0.5rem" spacing={2}>
+      <Grid container mt="0.5rem" spacing={2}>
         {comments?.map((comment) => {
           const { user, createdAt, description, _id, updatedAt } = comment;
           return (
