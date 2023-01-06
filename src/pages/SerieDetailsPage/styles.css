@@ -3,4 +3,12 @@
   min-height: 100vh;
   padding: 5rem;
   background-color: #18191a;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .serie-details {
+    padding: 5rem 1rem;
+  }
 }
