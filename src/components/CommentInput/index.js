@@ -3,6 +3,7 @@ import "./styles.css";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import IconButton from "@mui/material/IconButton";
 
 const CommentInput = (props) => {
   const {
@@ -29,7 +30,7 @@ const CommentInput = (props) => {
     setComment("");
   }
   return (
-    <div>
+    <React.Fragment>
       <form onSubmit={handleFormSubmit} className="comment-form">
         <TextareaAutosize
           className="comment-input"
@@ -43,11 +44,31 @@ const CommentInput = (props) => {
           color="custom"
           variant="contained"
           endIcon={<SendIcon />}
+          sx={{
+            display: { xs: 'none', md: 'flex' },
+            ml: '0.5rem',
+            borderRadius: '50px',
+          }}
         >
           Send
         </Button>
+        <IconButton
+          type="submit"
+          aria-label="send"
+          size="small"
+          sx={{
+            '&:hover': { backgroundColor: '#0f9585' },
+            width: '50px',
+            height: '50px',
+            backgroundColor: '#13c6b2',
+            display: { xs: 'flex', md: 'none' },
+            ml: '0.5rem',
+          }}
+        >
+          <SendIcon fontSize="small" sx={{ color: '#fff', ml: '0.3rem' }} />
+        </IconButton>
       </form>
-    </div>
+    </React.Fragment>
   );
 };
 

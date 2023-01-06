@@ -7,7 +7,7 @@
   width: 90%;
   max-width: 800px;
   color: #fff;
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .comment-input:focus {
@@ -20,4 +20,12 @@
 
 .comment-form {
   display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .comment-input {
+    font-size: 0.8rem;
+  }
 }
