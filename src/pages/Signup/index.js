@@ -70,7 +70,7 @@ export default function Signup({ authenticate }) {
         // unsuccessful signup
         console.error("Signup was unsuccessful: ", res);
         return setError({
-          message: "Signup was unsuccessful! Please check the console.",
+          message: res.errorMessage,
         });
       }
       // successful signup
