@@ -15,7 +15,7 @@ const ProgressBar = (props) => {
   };
 
   return (
-    <Box sx={{ width: 250 }}>
+    <Box sx={{ width: '80%' }}>
       <Typography id="input-slider" gutterBottom>
         {title}
       </Typography>

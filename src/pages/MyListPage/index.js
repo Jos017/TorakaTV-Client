@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ListCard from "../../components/ListCard";
 import Stack from "@mui/material/Stack";
+import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 
 import "./styles.css";
@@ -43,31 +44,38 @@ const MyListPage = (props) => {
   };
   return (
     <div className="my-list">
-      <Stack
-        direction="row"
-        alignItems="center"
-        spacing={3}
-        marginTop={{ xs: 12, sm: 1 }}
-        marginBottom={3}
+      <Grid
+        container
+        rowSpacing={2}
+        columnSpacing={{ xs: 0, md: 2 }}
+        maxWidth="1440px"
+        height="fit-content"
       >
-        <Typography variant="h2" color="#fff" fontWeight="Bold">
-          My List
-        </Typography>
-      </Stack>
-      <div className="list-container">
-        {userSession?.list &&
-          list.map((listItem) => {
-            return (
-              <ListCard
-                info={{ ...listItem }}
-                deleteListItem={deleteListItem}
-                updateListItem={updateListItem}
-                userSession={userSession}
-                key={listItem._id}
-              />
-            );
-          })}
-      </div>
+        <Grid item xs={12} marginTop={{ xs: 8, sm: 1 }}>
+          <Typography
+            variant="h2"
+            color="#fff"
+            fontWeight="Bold"
+            fontSize={{ xs: '2rem', md: '3rem' }}
+          >
+            My List
+          </Typography>
+        </Grid>
+        <Grid container mt="0.5rem">
+          {userSession?.list &&
+            list.map((listItem) => {
+              return (
+                <ListCard
+                  info={{ ...listItem }}
+                  deleteListItem={deleteListItem}
+                  updateListItem={updateListItem}
+                  userSession={userSession}
+                  key={listItem._id}
+                />
+              );
+            })}
+        </Grid>
+      </Grid>
     </div>
   );
 };

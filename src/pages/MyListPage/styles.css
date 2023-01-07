@@ -3,6 +3,8 @@
   min-height: 100vh;
   padding: 4rem;
   background-color: #18191a;
+  display: flex;
+  justify-content: center;
 }
 
 .list-container {
